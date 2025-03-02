@@ -1,0 +1,116 @@
+const MobileData = [
+    {
+        id:1,
+        name:"Samsung Galaxy A15",
+        price:43900,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile1.webp",
+        colors:["assets/mobileimages/mobile1black.webp","assets/mobileimages/mobile1lightblue.webp"]
+    },
+    {
+        id:2,
+        name:"KXD Classic core A06",
+        price:15299,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile2.webp",
+        colors:["assets/mobileimages/mobile2black.webp","assets/mobileimages/mobile2pink.webp"]
+    },
+    {
+        id:3,
+        name:"Itel Magic 4",
+        price:4099,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile3.webp",
+        colors:["assets/mobileimages/mobile2blue.webp","assets/mobileimages/mobile2garden.webp"]
+    },
+    {
+        id:4,
+        name:"Honor X8b",
+        price:69299,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile4.webp",
+        colors:["assets/mobileimages/mobile4black.webp","assets/mobileimages/mobile4silver.webp"]
+    },
+    {
+        id:5,
+        name:"Infinix Note 40 Pro",
+        price:64849,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile5.webp",
+        colors:["assets/mobileimages/mobile5black.webp","assets/mobileimages/mobile5gold.webp"]
+    },
+    {
+        id:6,
+        name:"Xiaomi Redmi Note 12",
+        price:40999,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile6.webp",
+        colors:["assets/mobileimages/mobile6gray.webp","assets/mobileimages/mobile6gold.webp"]
+    },
+    {
+        id:7,
+        name:"Oppo A3",
+        price:52999,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile7.webp",
+        colors:["assets/mobileimages/mobile7white.webp","assets/mobileimages/mobile7purple.webp"]
+    },
+    {
+        id:8,
+        name:"Apple iPhone 14",
+        price:259999,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile8.webp",
+        colors:["assets/mobileimages/mobile8black.webp","assets/mobileimages/mobile8purple.webp"]
+    },
+    {
+        id:9,
+        name:"Apple iPhone 16 Pro",
+        price:435000,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile9.webp",
+        colors:["assets/mobileimages/mobile9titanium.webp","assets/mobileimages/mobile9white.webp"]
+    },
+    {
+        id:10,
+        name:"Samsung Galaxy S24",
+        price:252000,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile10.webp",
+        colors:["assets/mobileimages/mobile10black.webp","assets/mobileimages/mobile10gray.webp"]
+    },
+    {
+        id:11,
+        name:"Samsung Galaxy A25",
+        price:68500,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile11.webp",
+        colors:["assets/mobileimages/mobile11black.webp","assets/mobileimages/mobile11yellow.webp"]
+    },
+    {
+        id:12,
+        name:"Apple iPhone 15 Pro",
+        price:399999,
+        rating:4.5,
+        reviews:39,
+        image:"assets/mobileimages/mobile12.webp",
+        colors:["assets/mobileimages/mobile12black.webp","assets/mobileimages/mobile12blue.webp"]
+    },
+    
+    
+
+    
+]
+
+export default MobileData
