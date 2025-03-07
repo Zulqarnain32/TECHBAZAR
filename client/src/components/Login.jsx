@@ -1,23 +1,60 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link,useNavigate } from "react-router-dom"
+import axios from "axios"
+import  {useCookies} from "react-cookie"
 
 const Login = () => {
+  const [ email,setEmail ] = useState("")
+  const [ password,setPassword ] = useState("")
+  const [ error,setError ] = useState("")
+  const [cookies, setCookies] = useCookies(["access_token"]);
+  
+  const navigate = useNavigate()
+
+  axios.defaults.withCredentials = true
+  const handleSubmit = (e) => {
+      e.preventDefault()    
+      axios.post('http://localhost:5000/api/auth/login',{email,password})
+      .then(result => {
+          if(result?.data?.message == "sucessfully login"){
+            window.localStorage.setItem("id",result.data.id)
+            console.log("login ho geya");
+            setCookies("access_token",result.data.id)
+            
+          setError("");
+          // navigate('/dashboard')
+          // window.location.reload();
+        
+          }
+          else if(result?.data?.message == "please fill all the fields"){
+             setError("Please fill all the fields")
+          }
+          else if(result?.data?.message === "incorrect password"){
+              setError("incorrect password")
+          } else if(result?.data?.message === "invalid email"){
+              setError("email not found")
+          } else {
+              setError("")
+          }
+          console.log(result)    
+      }).catch(err => console.log(err))
+  }
   return (
     <div className="flex justify-center items-center h-[calc(100vh-70px)] bg-gray-100">
       <div className="bg-white p-6 w-80 rounded-lg shadow-lg ">
         <p className="text-center text-2xl font-extrabold text-blue-500 mb-4">TECH<span className='text-red-500'>BAZAAR</span></p>
         
-        <form className="flex flex-col">
+        <form className="flex flex-col" onSubmit = {handleSubmit}>
           <input
             type="text"
             placeholder="Email"
-            required
+            onChange={(e) => setEmail(e.target.value)}
             className="p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
             placeholder="Password"
-            required
+            onChange={(e) => setPassword(e.target.value)}
             className="p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           
@@ -27,6 +64,7 @@ const Login = () => {
           >
             Log In
           </button>
+          {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
           
           <a href="#" className="text-blue-600 text-center mt-3 text-sm hover:underline">
             Forgot Password?

@@ -46,7 +46,7 @@ const Navbar = () => {
         <Link to="/products" className="md:text-red-500 md:font-extrabold  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           Private
         </Link>
-        <Link to="/products" className="md:text-red-500 md:font-extrabold  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+        <Link to="/dashboard" className="md:text-red-500 md:font-extrabold  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           DASHBOARD
         </Link>
         <Link to="/cart" className="md:text-red-500 md:font-extrabold  block py-4 px-4 border-b md:border-0" onClick={closeNav}>

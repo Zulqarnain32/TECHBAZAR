@@ -30,8 +30,9 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { username, password } = req.body;
-  if(!username || !password ){
+  console.log("req body ", req.body);
+  const { email, password } = req.body;
+  if(!email || !password ){
     return res.json({message:"please fill all the fields"})
   }
   const user = await Usermodel.findOne({ email });
@@ -42,8 +43,11 @@ const login = async (req, res) => {
   if(!isMatch){
     return res.json({message:"incorrect password"})
   }
-  const token = jwt.sign({id:user._id,role:user.role,username:user.username,email:user.email},process.env.SECRET_KEY)
+  const token = jwt.sign({id:user._id,role:user.role,username:user.username,email:user.email},"My-Secret-Key")
   return res.json({message:"sucessfully login",token,role:user.role,username:user.username,email:user.email})
 };
+
+
+
 
 module.exports = { register, login };
