@@ -22,8 +22,8 @@ const Login = () => {
             setCookies("access_token",result.data.id)
             
           setError("");
-          // navigate('/dashboard')
-          // window.location.reload();
+          navigate('/dashboard')
+          window.location.reload();
         
           }
           else if(result?.data?.message == "please fill all the fields"){

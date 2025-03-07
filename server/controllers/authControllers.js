@@ -44,7 +44,7 @@ const login = async (req, res) => {
     return res.json({message:"incorrect password"})
   }
   const token = jwt.sign({id:user._id,role:user.role,username:user.username,email:user.email},"My-Secret-Key")
-  return res.json({message:"sucessfully login",token,role:user.role,username:user.username,email:user.email})
+  return res.json({message:"sucessfully login",token,role:user.role,username:user.username,email:user.email,id:user._id})
 };
 
 
