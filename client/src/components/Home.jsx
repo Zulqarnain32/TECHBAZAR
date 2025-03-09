@@ -12,10 +12,7 @@ const Home = () => {
             Top Gadgets, Best Prices Shop Now & Save!
           </h1>
           <p className="my-4">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Repudiandae, modi quo. Reiciendis autem, modi fugiat vel eum at
-            tenetur volupa veritatis illum nihil commodi error quis. Vero quas
-            veritatis doloribus totam alias?
+          Upgrade your lifestyle with the latest gadgets! From flagship smartphones to high-performance laptops and top-quality accessories, we bring you the best tech at unbeatable prices. Browse, shop, and experience innovation with seamless shopping and fast delivery
           </p>
 
           <button className=" px-3 py-2 bg-red-500 text-white cursor-pointer ">
@@ -48,7 +45,7 @@ const Home = () => {
           <img
             src={image}
             alt="image not found"
-            className="w-[400px] h-[480px]"
+            className="w-[420px] h-[500px] drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
           />
         </div>
       </div>

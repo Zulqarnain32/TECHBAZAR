@@ -8,7 +8,9 @@ import Cart from './components/Cart'
 import Registration from './components/Registration'
 import Bot from './components/Bot'
 import Dashboard from './components/Dashboard'
+import ForgotPassword from './components/ForgotPassword'
 import { useCookies } from 'react-cookie'
+import ResetPassword from './components/ResetPassword'
 import("./App.css")
 const App = () => {
   const [cookies,setCookies] = useCookies(["access_token"])
@@ -24,6 +26,9 @@ const App = () => {
            <Route path='/products' element = {cookies.access_token ? <Products/>:<Home/>}/>
            <Route path='/cart' element = {< Cart/>}/>
            <Route path='/dashboard' element = {< Dashboard/>}/>
+           <Route path='/forgot-password' element = {< ForgotPassword/>}/>
+           <Route path="/resetPassword/:token" element={<ResetPassword />} />
+
         </Routes>
       </BrowserRouter>
     </>
