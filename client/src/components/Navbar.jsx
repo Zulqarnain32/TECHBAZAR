@@ -38,7 +38,7 @@ const Navbar = () => {
         <h4 className="font-extrabold">TECH<span className="text-red-500">BAZAAR</span></h4>
       </div>
       <div className="block md:hidden cursor-pointer" onClick={handleShowNavbar}>
-        <GiHamburgerMenu className="text-3xl text-blue-500" />
+        <GiHamburgerMenu className="text-3xl text-white" />
       </div>
       <div
         className={`xs:bg-blue-500 xs:text-white absolute md:static top-[70px] left-0 w-[140px] md:w-auto h-screen md:h-auto transition-all duration-300 ease-in overflow-hidden z-50 md:flex md:items-center md:space-x-8 md:text-[18px] font-bold uppercase tracking-wide ${
