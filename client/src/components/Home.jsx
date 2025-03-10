@@ -3,11 +3,9 @@ import React, { useState } from "react";
 const Home = () => {
   const [image, setImage] = useState("assets/headphones/headphone11.png");
   return (
-    // <div className='bg-blue-300 h-screen '>
-    <div className="p-20 bg-gradient-to-r from-[#83ccff] to-[#4290fb] h-[calc(100vh-70px)] ">
-      {/* <div className='bg-white h-[calc(100vh-70px)] p-20'> */}
-      <div className="flex items-center justify-between h-full">
-        <div className="w-[50%]">
+    <div className="xs:p-5 p-20 bg-gradient-to-r from-[#83ccff] to-[#4290fb] xs:h-auto xs:w-full h-[calc(100vh-70px)] ">
+      <div className="flex  xs:flex-wrap items-center justify-between h-full">
+        <div className="xs:w-full w-[50%]">
           <h1 className="text-5xl font-bold leading-[55px]  ">
             Top Gadgets, Best Prices Shop Now & Save!
           </h1>
