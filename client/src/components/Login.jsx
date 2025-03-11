@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link,useNavigate } from "react-router-dom"
 import axios from "axios"
 import  {useCookies} from "react-cookie"
+import { AuthContext } from '../global/AuthContext';
 
 const Login = () => {
   const [ email,setEmail ] = useState("")
   const [ password,setPassword ] = useState("")
   const [ error,setError ] = useState("")
   const [cookies, setCookies] = useCookies(["access_token"]);
+  const { setUser } = useContext(AuthContext)
   
   const navigate = useNavigate()
 
@@ -18,8 +20,10 @@ const Login = () => {
       .then(result => {
           if(result?.data?.message == "sucessfully login"){
             window.localStorage.setItem("id",result.data.id)
+            window.localStorage.setItem("user", JSON.stringify(result.data));
             console.log("login ho geya");
             setCookies("access_token",result.data.id)
+            setUser({ username: result.data.username});
             
           setError("");
           navigate('/dashboard')

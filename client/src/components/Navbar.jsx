@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import { useCookies } from 'react-cookie';
 import { FaShoppingCart } from "react-icons/fa";
 import React from "react";
+import { AuthContext } from "../global/AuthContext";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [cookies, setCookies] = useCookies(["access_token"]);
+  const { user } = useContext(AuthContext)
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -20,7 +22,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setCookies("access_token", "");
-    // window.localStorage.clear();
+    window.localStorage.removeItem("user")
     window.location.reload(); // Ensures UI updates after logout
   };
 
@@ -57,6 +59,9 @@ const Navbar = () => {
         <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           DASHBOARD
         </Link>
+       {user &&  <Link className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+          {user.username}
+        </Link>}
         <Link to="/cart" className="md:text-white block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           <div className="flex">
           <FaShoppingCart className="text-3xl"/>
