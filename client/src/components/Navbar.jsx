@@ -59,7 +59,7 @@ const Navbar = () => {
         <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           DASHBOARD
         </Link>
-       {user &&  <Link className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+       {user &&  <Link className="text-red-500 md:text-red-500  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           {user.username}
         </Link>}
         <Link to="/cart" className="md:text-white block py-4 px-4 border-b md:border-0" onClick={closeNav}>
