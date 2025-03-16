@@ -29,6 +29,7 @@ const App = () => {
            <Route path='/login' element = {< Login/>}/>
            <Route path='/registration' element = {< Registration/>}/>
            <Route path='/products' element = {cookies.access_token ? <Products/>:<Login/>}/>
+           {/* <Route path='/products' element = {<Products/>}/> */}
            <Route path='/cart' element = {< Cart/>}/>
            {/* <Route path='/dashboard' element = {< Dashboard/>}/> */}
            <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/>

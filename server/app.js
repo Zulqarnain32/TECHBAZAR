@@ -1,7 +1,7 @@
 const express = require("express")
 const dbConnect = require("./dbConfig/dbConnect")
 const authRoutes = require("./routes/authRoutes")
-// const userRoutes = require("./routes/userRoutes")
+const userRoutes = require("./routes/userRoutes")
 require("dotenv").config();
 const cors = require("cors");
 const Usermodel = require("./models/UserModel");
@@ -27,7 +27,7 @@ app.get("/dashboard", async (req, res) => {
 });
 
 app.use("/api/auth",authRoutes)
-// app.use("/api/users",userRoutes)
+app.use("/api/users",userRoutes)
 
 const PORT = 5000;
 

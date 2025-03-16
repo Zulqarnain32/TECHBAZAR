@@ -26,7 +26,7 @@ const Login = () => {
             setUser({ username: result.data.username});
             
           setError("");
-          navigate('/dashboard')
+          navigate('/products')
           window.location.reload();
         
           }

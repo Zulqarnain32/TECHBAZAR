@@ -1,5 +1,13 @@
 const EarBirds = [
     {
+        id:0,
+        name:"Zero Wave Pro Earbuds",
+        price:4899,
+        rating:4.5,
+        reviews:39,
+        image:"assets/earbudsimages/earbud10.webp"
+    },
+    {
         id:1,
         name:"Audionic Airbud 590 Wireless",
         price:3949,
@@ -33,7 +41,8 @@ const EarBirds = [
     },
     {
         id:5,
-        name:"Apple AirPods 4 Active Noise Cancellation",
+        // name:"Apple AirPods 4 Active Noise Cancellation",
+        name:"Earbud 4 Noise Cancellation ",
         price:52399,
         rating:4.5,
         reviews:39,
@@ -71,14 +80,7 @@ const EarBirds = [
         reviews:39,
         image:"assets/earbudsimages/earbud9.webp"
     },
-    {
-        id:10,
-        name:"Zero Wave Pro Earbuds",
-        price:4899,
-        rating:4.5,
-        reviews:39,
-        image:"assets/earbudsimages/earbud10.webp"
-    },
+   
     
 ]
 

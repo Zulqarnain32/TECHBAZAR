@@ -19,6 +19,7 @@ const Navbar = () => {
   const closeNav = () => {
     setShowNavbar(false);
   };
+    let isAdmin = user?.role === "admin"
 
   const handleLogout = () => {
     setCookies("access_token", "");
@@ -51,23 +52,32 @@ const Navbar = () => {
           <RxCross2 />
         </button>
         <Link to="/" className="text-white md: block py-4 px-4 border-b md:border-0" onClick={closeNav}>
-          HOME
+          Home
         </Link>
         <Link to="/products" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
-          PRODUCTS
+          Products
         </Link>
+        {/* <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+          Dashboard
+        </Link> */}
+        {isAdmin && 
         <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           DASHBOARD
-        </Link>
+        </Link>}
        {user &&  <Link className="text-red-500 md:text-red-500  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           {user.username}
         </Link>}
-        <Link to="/cart" className="md:text-white block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+
+
+        {/* <Link to="/cart" className="md:text-white block py-4 px-4 border-b md:border-0" onClick={closeNav}> */}
+        <Link to="/cart" className="xs:fixed xs:top-5 xs:right-[60px] text-white" onClick={closeNav}>
           <div className="flex">
           <FaShoppingCart className="text-3xl"/>
           <span className= "mt-[-5px] ml-0.5 bg-red-500 text-white text-[12px]  rounded-full h-[20px] w-5 flex items-center justify-center font-semibold" >12</span>
           </div>
         </Link>
+
+
 
         {/* Conditional Rendering for Login/Logout */}
         {cookies.access_token ? (

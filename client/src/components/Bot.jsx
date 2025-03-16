@@ -8,8 +8,9 @@ const Bot = () => {
    const [input, setInput] = useState("");
    const [thinking, setThinking] = useState(false);
    const messagesEndRef = useRef(null);
-
-   const API_KEY = "AIzaSyCKYhX_a-LBNPNrydxpF5mEE92Ej-pKyEM";
+   
+   // const API_KEY = "AIzaSyAOoMaDgquBosdhLdXdB8Oc7WXFUfoMZIE";
+   const API_KEY = "AIzaSyCKYhX_a-LBNPNrydxpF5mEE92Ej-pKyEM"; //first one
    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
    useEffect(() => {
@@ -43,6 +44,8 @@ const Bot = () => {
          const botReply =
             response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
             "Sorry, I didn't understand that.";
+            console.log(botReply);
+            
 
          setMessages([...newMessages, { text: botReply, sender: "bot" }]);
       } catch (error) {
@@ -55,6 +58,9 @@ const Bot = () => {
          setTimeout(() => setThinking(false), 300); // Small delay for smooth transition
       }
    };
+
+
+   
 
    return (
       <>
