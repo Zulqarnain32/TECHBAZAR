@@ -11,6 +11,8 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [cookies, setCookies] = useCookies(["access_token"]);
   const { user } = useContext(AuthContext)
+  // console.log("user",user);
+  
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -57,9 +59,9 @@ const Navbar = () => {
         <Link to="/products" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           Products
         </Link>
-        {/* <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
-          Dashboard
-        </Link> */}
+        <Link to="/favorite" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
+          Favorite
+        </Link>
         {isAdmin && 
         <Link to="/dashboard" className="md:text-white  block py-4 px-4 border-b md:border-0" onClick={closeNav}>
           DASHBOARD
@@ -80,7 +82,7 @@ const Navbar = () => {
 
 
         {/* Conditional Rendering for Login/Logout */}
-        {cookies.access_token ? (
+        {user?.username ? (
           <button
             onClick={handleLogout}
             className="text-white block py-1.5 xs:m-3  px-3  md:border-0 cursor-pointer bg-red-500 "

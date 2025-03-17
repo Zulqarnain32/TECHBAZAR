@@ -1,15 +1,13 @@
 import React from 'react'
 import {FaStar} from "react-icons/fa"
 import data from "../global/EarbirdsData"
-import {useDispatch} from "react-redux"
-import { addToCart } from '../store/slices/ProductSlices'
+
 const Products = () => {
 
-  const dispatch = useDispatch();
-  const handleAddProduct = (id) => {
-    console.log("product id is ", id);
-    dispatch(addToCart(data[id]))
-    
+  const handleAddProduct = (id) => {    
+  }
+
+  const handleFavorite = (id) => {
   }
 
   return (
@@ -35,7 +33,7 @@ const Products = () => {
                            </div>
                            <div className='flex justify-between mt-3'>
                              <div className='bg-blue-500 hover:bg-blue-700 text-white cursor-pointer px-2 py-1' onClick={() => handleAddProduct(product.id)}>Buy Now </div>
-                             <div className='text-2xl'>💙</div>
+                             <div className='text-2xl cursor-pointer' onClick={() => handleFavorite(product.id)}>💙</div>
                            </div>
                          </div>
                       </div>

@@ -1,17 +1,16 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Cart = () => {
-  const cartData = useSelector((state) => {
-    return state.products
-  })
-  console.log(cartData);
+
   
+
   return (
     <>
-      <h1>Cart page</h1>
+     
+     <h1>Add To Cart Page</h1>
     </>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
         enum:["admin","manager","user"]
     },
     
+    
 })
 
 const Usermodel = new mongoose.model("UserModel",userSchema);
