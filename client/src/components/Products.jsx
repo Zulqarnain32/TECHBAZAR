@@ -1,6 +1,7 @@
 import React from 'react'
 import {FaStar} from "react-icons/fa"
 import data from "../global/EarbirdsData"
+import { useNavigate } from 'react-router-dom'
 
 const Products = () => {
 
@@ -9,6 +10,8 @@ const Products = () => {
 
   const handleFavorite = (id) => {
   }
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -33,6 +36,7 @@ const Products = () => {
                            </div>
                            <div className='flex justify-between mt-3'>
                              <div className='bg-blue-500 hover:bg-blue-700 text-white cursor-pointer px-2 py-1' onClick={() => handleAddProduct(product.id)}>Buy Now </div>
+                             <div className='bg-red-500 hover:red-blue-700 text-white cursor-pointer px-2 py-1'  onClick={() => navigate(`/products/${product.id}`)}>Detail </div>
                              <div className='text-2xl cursor-pointer' onClick={() => handleFavorite(product.id)}>💙</div>
                            </div>
                          </div>

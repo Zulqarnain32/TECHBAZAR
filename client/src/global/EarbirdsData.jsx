@@ -5,7 +5,8 @@ const EarBirds = [
         price:4899,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud10.webp"
+        image:"/assets/earbudsimages/earbud10.webp",
+        gallary:["/assets/earbudsimages/earbud10sub1.webp","/assets/earbudsimages/earbud10sub2.webp"]
     },
     {
         id:1,
@@ -13,7 +14,7 @@ const EarBirds = [
         price:3949,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud1.webp"
+        image:"/assets/earbudsimages/earbud1.webp"
     },
     {
         id:2,
@@ -21,7 +22,7 @@ const EarBirds = [
         price:3899,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbuds2.webp"
+        image:"/assets/earbudsimages/earbuds2.webp"
     },
     {
         id:3,
@@ -29,7 +30,7 @@ const EarBirds = [
         price:4349,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud3.webp"
+        image:"/assets/earbudsimages/earbud3.webp"
     },
     {
         id:4,
@@ -37,7 +38,7 @@ const EarBirds = [
         price:37599,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud4.webp"
+        image:"/assets/earbudsimages/earbud4.webp"
     },
     {
         id:5,
@@ -46,7 +47,7 @@ const EarBirds = [
         price:52399,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud5.webp"
+        image:"/assets/earbudsimages/earbud5.webp"
     },
     {
         id:6,
@@ -54,7 +55,7 @@ const EarBirds = [
         price:4799,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud6.webp"
+        image:"/assets/earbudsimages/earbud6.webp"
     },
     {
         id:7,
@@ -62,7 +63,7 @@ const EarBirds = [
         price:4199,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud7.webp"
+        image:"/assets/earbudsimages/earbud7.webp"
     },
     {
         id:8,
@@ -70,7 +71,7 @@ const EarBirds = [
         price:4199,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud8.webp"
+        image:"/assets/earbudsimages/earbud8.webp"
     },
     {
         id:9,
@@ -78,7 +79,7 @@ const EarBirds = [
         price:4449,
         rating:4.5,
         reviews:39,
-        image:"assets/earbudsimages/earbud9.webp"
+        image:"/assets/earbudsimages/earbud9.webp"
     },
    
     
