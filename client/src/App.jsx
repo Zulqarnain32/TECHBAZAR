@@ -14,6 +14,7 @@ import ResetPassword from './components/ResetPassword'
 import { AuthContext } from './global/AuthContext'
 import Favorite from './components/Favorite'
 import ProductDetail from './components/ProductDetail'
+import Test from './components/test'
 import("./App.css")
 const App = () => {
   const {user} = useContext(AuthContext)
@@ -30,12 +31,14 @@ const App = () => {
            <Route path='/' element = {< Home/>}/>
            <Route path='/login' element = {< Login/>}/>
            <Route path='/registration' element = {< Registration/>}/>
-           <Route path='/products' element = {cookies.access_token ? <Products/>:<Login/>}/>
-           <Route path='/products/:id' element = { <ProductDetail/>}/>
+           {/* <Route path='/products' element = {cookies.access_token ? <Products/>:<Login/>}/> */}
+           <Route path='/products' element = {user ? <Products/>:<Login/>}/>
+           <Route path='/products/:id' element = {user? <ProductDetail/>:<Registration/>}/>
            <Route path='/cart' element = {< Cart/>}/>
            <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/>
            <Route path='/favorite' element = {<Favorite/>}/>
            <Route path='/forgot-password' element = {< ForgotPassword/>}/>
+           <Route path='/test' element = {<Test/>}/>
            <Route path="/resetPassword/:token" element={<ResetPassword />} />
 
         </Routes>

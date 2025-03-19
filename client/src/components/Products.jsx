@@ -1,6 +1,8 @@
 import React from 'react'
 import {FaStar} from "react-icons/fa"
 import data from "../global/EarbirdsData"
+import data1 from "../global/MobileData"
+import data2 from "../global/WatchedData"
 import { useNavigate } from 'react-router-dom'
 
 const Products = () => {
@@ -23,8 +25,8 @@ const Products = () => {
              <div className='w-[80%] '>
                 <div className='flex flex-wrap justify-between border '>
                   {data.map((product,index) => (
-                    <>
-                      <div key={product.id} className=' py-4 px-2 md:w-[24%] mb-3 border bg-white'>
+                    <div key={index}>
+                      <div className=' py-4 px-2  mb-3 border bg-white'>
                          <div className=''>
                            <img src={product.image} alt="" className='w-[150px] mx-auto' />
                             <h1 className=' text-[13px] my-2 '>{product.name}</h1>
@@ -41,7 +43,7 @@ const Products = () => {
                            </div>
                          </div>
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
              </div>
