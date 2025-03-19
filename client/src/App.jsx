@@ -31,7 +31,6 @@ const App = () => {
            <Route path='/' element = {< Home/>}/>
            <Route path='/login' element = {< Login/>}/>
            <Route path='/registration' element = {< Registration/>}/>
-           {/* <Route path='/products' element = {cookies.access_token ? <Products/>:<Login/>}/> */}
            <Route path='/products' element = {user ? <Products/>:<Login/>}/>
            <Route path='/products/:id' element = {user? <ProductDetail/>:<Registration/>}/>
            <Route path='/cart' element = {< Cart/>}/>
@@ -40,7 +39,6 @@ const App = () => {
            <Route path='/forgot-password' element = {< ForgotPassword/>}/>
            <Route path='/test' element = {<Test/>}/>
            <Route path="/resetPassword/:token" element={<ResetPassword />} />
-
         </Routes>
       </BrowserRouter>
     </>
