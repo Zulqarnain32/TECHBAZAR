@@ -26,20 +26,20 @@
 //               src={image}
 //               className="w-[400px] mx-auto border-2 rounded-3xl"
 //             />
-//             <div className="flex justify-center space-x-5 mt-2">
-//               {
-//                 product.gallary.map((prod, i) => (
-//                   <div
-//                     key={i}
-//                     className="border-2 rounded-lg p-1"
-//                     onClick={() => changeImage(product.gallary[i])}>
-//                     <img src={product.gallary[i]} className="w-[40px] mx-auto" />
-//                   </div>
+            // <div className="flex justify-center space-x-5 mt-2">
+            //   {
+            //     product.gallary.map((prod, i) => (
+            //       <div
+            //         key={i}
+            //         className="border-2 rounded-lg p-1"
+            //         onClick={() => changeImage(product.gallary[i])}>
+            //         <img src={product.gallary[i]} className="w-[40px] mx-auto" />
+            //       </div>
 
-//                 ))
-//               }
+            //     ))
+            //   }
 
-//             </div>
+            // </div>
 //           </div>
 //         </div>
 //         <div className="w-1/2 xs:w-full">
@@ -134,7 +134,21 @@ const ProductDetail = () => {
               className="p-5 w-[450px] mx-auto border-2 rounded-3xl"
             />
 
-          </div>
+          <div className="flex justify-center space-x-5 mt-2">
+              {
+                product.gallary.map((prod, i) => (
+                  <div
+                    key={i}
+                    className="border-2 rounded-lg p-1"
+                    onClick={() => changeImage(product.gallary[i])}>
+                    <img src={product.gallary[i]} className="w-[40px] mx-auto" />
+                  </div>
+
+                ))
+              }
+
+            </div>
+            </div>
         </div>
         <div className="w-1/2 xs:w-full">
           <div>
