@@ -10,7 +10,13 @@ const userSchema = new mongoose.Schema({
         name: String,
         price: Number,
         image: String,
-        quantity: Number
+        quantity: Number,
+        oldPrice:Number,
+        rating:Number,
+        reviews:Number,
+        off:Number,
+        colorName: Array,
+
     }], default: [] }
 });
 

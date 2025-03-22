@@ -41,8 +41,15 @@ router.post("/add-to-cart", async (req, res) => {
             name: product.name,
             price: product.price,
             image: product.image,
-            quantity: product.quantity || 1, // Default quantity to 1 if not provided
+            rating:product.rating,
+            oldPrice:product.oldPrice,
+            off:product.off,
+            reviews:product.reviews,
+            quantity: product.quantity || 1, 
+            colorName:product.colorName
+
         });
+        
 
         await user.save();
         console.log("Cart updated:", user.cart);

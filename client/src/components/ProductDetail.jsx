@@ -7,6 +7,8 @@ import axios from "axios";
 const ProductDetail = () => {
     const { id } = useParams();
     const product = data.find((item) => item.id === parseInt(id));
+    // console.log("entire product ",product);
+    
     const [image, setImage] = useState([product.image]);
     const [user, setUser] = useState(null); // Initialize user state
 
@@ -17,14 +19,14 @@ const ProductDetail = () => {
             try {
                 const parsedUser = JSON.parse(logginedUser);
                 setUser(parsedUser);
-                console.log("Logged in user data is ", parsedUser);
+                // console.log("Logged in user data is ", parsedUser);
             } catch (error) {
                 console.error("Error parsing user data:", error);
             }
         }
     },[]);
 
-    console.log("logged in user id is ", localStorage.getItem("id"));
+    // console.log("logged in user id is ", localStorage.getItem("id"));
 
     const changeImage = (imageAddress) => {
         setImage([imageAddress]);
@@ -46,7 +48,10 @@ const ProductDetail = () => {
                 product: product,
             });
 
-            alert(response.data.message);
+            // alert(response.data.message);
+            console.log(response.data);
+            localStorage.setItem("cart", JSON.stringify(response.data.cart));
+            
         } catch (error) {
             console.error("Error adding to cart:", error.response?.data?.error || error.message);
         }
