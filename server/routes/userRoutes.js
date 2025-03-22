@@ -2,7 +2,8 @@ const express = require("express")
 const verifyToken = require("../middlewares/authMiddleware")
 const authrizedRole = require("../middlewares/roleMiddleware")
 const router = express.Router();
-
+const UserModel = require("../models/UserModel")
+const mongoose = require("mongoose")
 
 router.get("/superAdmin", verifyToken,authrizedRole("superAdmin"),(req,res) => {
     res.json("Welcome User")
@@ -22,5 +23,6 @@ router.get("/manager", verifyToken,authrizedRole("admin","manager"),(req,res) =>
 router.get("/user", verifyToken,authrizedRole("admin","manager","user"),(req,res) => {
     res.json("Welcome User")
 })
+
 
 module.exports = router

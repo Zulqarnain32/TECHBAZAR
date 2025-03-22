@@ -1,14 +1,14 @@
 const express = require("express")
+const app = express();
 const dbConnect = require("./dbConfig/dbConnect")
 const authRoutes = require("./routes/authRoutes")
 const userRoutes = require("./routes/userRoutes")
-require("dotenv").config();
+const cartRoutes = require("./routes/cartRoutes")
 const cors = require("cors");
 const Usermodel = require("./models/UserModel");
 
-const app = express();
+require("dotenv").config();
 dbConnect()
-
 
 app.use(express.json());
 app.use(cors({
@@ -28,10 +28,10 @@ app.get("/dashboard", async (req, res) => {
 
 app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
+// app.use("/api/cart", cartRoutes);
+app.use("/api/cart", cartRoutes);
 
 const PORT = 5000;
-
-
 
 app.listen(PORT, () => {
     console.log("server running on port", PORT);

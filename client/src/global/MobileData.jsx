@@ -8,13 +8,13 @@ const MobileData = [
         off:1,
         oldPrice:404700,
         storage:[
-            {st1:"1TB",price:588750},
-            {st2:"128GB RAM",price:399999},
+            {size:"128GB RAM",price:399999},
+            {size:"1TB",price:588750},
         ],
         image:"/assets/mobileimages/mobile12.webp",
         gallary:[],
         colors:["/assets/mobileimages/mobile12.webp","/assets/mobileimages/mobile12black.webp","/assets/mobileimages/mobile12blue.webp"],
-        colorName:["black","blue","white","natural"],
+        colorName:["white","blue","black"],
 
     },
     {
@@ -43,7 +43,7 @@ const MobileData = [
         oldPrice:22500,
         off:32,
         storage:[
-            {size:"64GB-4GB RAM", price:15298},
+            {size:"64GB-4GB RAM", price:15299},
         ],
         image:"/assets/mobileimages/mobile2.webp",
         gallary:["/assets/mobileimages/mobile2.webp"],
@@ -59,7 +59,7 @@ const MobileData = [
         off:0,
         oldPrice:4099,
         image:"/assets/mobileimages/mobile3.webp",
-        storage:["standard"],
+        storage:[{size:"standard"}],
         gallary:["/assets/mobileimages/mobile3.webp"],
         colors:["/assets/mobileimages/mobile3.webp","/assets/mobileimages/mobile3blue.webp","/assets/mobileimages/mobile3golder.webp"],
         colorName:["Dreamy Purple","Aurora Blue","Golden"]

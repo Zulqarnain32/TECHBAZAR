@@ -1,6 +1,6 @@
 const EarBirds = [
     {
-        id: 0,
+        id:0,
         name: "Zero Wave Pro Earbuds",
         price: 4899,
         rating: 4.5,

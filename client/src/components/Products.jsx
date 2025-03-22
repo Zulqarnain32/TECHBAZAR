@@ -24,7 +24,7 @@ const Products = () => {
              </div>
              <div className='w-[80%] '>
                 <div className='flex flex-wrap justify-between border '>
-                  {data1.map((product,index) => (
+                  {data.map((product,index) => (
                     <div key={index}>
                       <div className=' py-4 px-2  mb-3 border bg-white'>
                          <div className=''>
