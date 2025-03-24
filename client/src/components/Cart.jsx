@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+// import { incrProduct, decrProduct, removeProduct } from "../redux/productSlice";
+import { incrProduct, decrProduct, removeProduct } from "../store/slices/ProductSlices"
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([]);
+  const cart = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  console.log(cart);
+  
 
-    useEffect(() => {
-        // 🟢 Retrieve cart data from localStorage
-        const storedCart = localStorage.getItem("cart");
-        if (storedCart) {
-            setCartItems(JSON.parse(storedCart));
-        }
-    }, []);
-
-    return (
-        <div>
-            <h2>Cart Items</h2>
-            {cartItems.length > 0 ? (
-                cartItems.map((item, index) => (
-                    <div key={index} className="cart-item">
-                        <img src={item.image} alt={item.name} width="50" />
-                        <h3>{item.name}</h3>
+  return (
+    <>
+        <div className="p-6">
+            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+            {cart?.map((item, index) => (
+                <div key={index} className="flex items-center space-x-4 border-b py-2">
+                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover" />
+                    <div>
+                        <h2 className="text-lg font-semibold">{item.name}</h2>
                         <p>Price: Rs {item.price}</p>
-                        <p>Quantity: {item.quantity}</p>
                     </div>
-                ))
-            ) : (
-                <p>Your cart is empty</p>
-            )}
+                </div>
+            ))}
         </div>
-    );
+    </>
+  );
 };
 
 export default Cart;

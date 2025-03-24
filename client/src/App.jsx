@@ -32,7 +32,7 @@ const App = () => {
            <Route path='/registration' element = {< Registration/>}/>
            <Route path='/products' element = {user ? <Products/>:<Login/>}/>
            <Route path='/products/:id' element = {user? <ProductDetail/>:<Registration/>}/>
-           <Route path='/cart' element = {< Cart/>}/>
+           <Route path='/cart' element = {user? < Cart/>:<Login/>}/>
            <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/>
            {/* <Route path='/dashboard' element = { <Dashboard/>}/> */}
            <Route path='/favorite' element = {<Favorite/>}/>

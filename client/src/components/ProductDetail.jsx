@@ -1,65 +1,44 @@
-import React, { useState, useEffect } from "react"; // Added useEffect
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import data from "../global/EarbirdsData";
 import { IoIosStar } from "react-icons/io";
-import axios from "axios";
+import { useDispatch } from "react-redux"
+import { addProduct } from "../store/slices/ProductSlices";
+import { addToFav } from "../store/slices/FavoriteSlices";
+
 
 const ProductDetail = () => {
-    const { id } = useParams();
-    const product = data.find((item) => item.id === parseInt(id));
-    // console.log("entire product ",product);
-    
-    const [image, setImage] = useState([product.image]);
-    const [user, setUser] = useState(null); // Initialize user state
+  const { id } = useParams();
+  const product = data.find((item) => item.id === parseInt(id));
+  const [image, setImage] = useState([product.image])
 
-    useEffect(() => {
-        // Fetch user data on component mount
-        const logginedUser = localStorage.getItem("user");
-        if (logginedUser) {
-            try {
-                const parsedUser = JSON.parse(logginedUser);
-                setUser(parsedUser);
-                // console.log("Logged in user data is ", parsedUser);
-            } catch (error) {
-                console.error("Error parsing user data:", error);
-            }
-        }
-    },[]);
+  const dispatch = useDispatch()
 
-    // console.log("logged in user id is ", localStorage.getItem("id"));
-
-    const changeImage = (imageAddress) => {
-        setImage([imageAddress]);
-    };
-
-    if (!product) {
-        return <h1 className="text-center text-red-500">Product Not Found</h1>;
-    }
-
-    const addToCart = async () => {
-        if (!user || !user.id) {
-            alert("Please log in to add items to your cart.");
-            return;
-        }
-
-        try {
-            const response = await axios.post("http://localhost:5000/api/cart/add-to-cart", {
-                userId: user.id, // Use user.id (from parsed user data)
-                product: product,
-            });
-
-            // alert(response.data.message);
-            console.log(response.data);
-            localStorage.setItem("cart", JSON.stringify(response.data.cart));
-            
-        } catch (error) {
-            console.error("Error adding to cart:", error.response?.data?.error || error.message);
-        }
-    };
+  const handleAddToCart = (id) => {
+    console.log("you click on ", data[id].name);
+    dispatch(addProduct(data[id]))
+  }
 
 
-      
-    
+  const changeImage = (imageAddress) => {
+    setImage([imageAddress])
+  }
+
+
+
+
+  const handleAddToFavorite = async (id) => {
+    console.log("you clicked on ", data[id].name);
+    dispatch(addToFav(data[id]))
+
+  }
+
+
+
+  if (!product) {
+    return <h1 className="text-center text-red-500">Product Not Found</h1>;
+  }
+
   return (
     <div className="xs:w-[95%]">
       <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)]  space-x-5">
@@ -112,7 +91,7 @@ const ProductDetail = () => {
                   <div
                     key={i}
                     tabIndex={0}
-                    className="w-[80px] border-2 border-gray-200 focus:border-blue-400 rounded-lg cursor-pointer text-center py-3 px-2"
+                    className="w-[80px] border-2 border-gray-200 text-gray-400 focus:text-blue-500 focus:border-blue-400 rounded-lg cursor-pointer text-center py-3 px-2"
                     onClick={() => changeImage(product.colors[i])}
                   >
                     <img src={product.colors[i]} className="w-[40px] mx-auto" />
@@ -123,17 +102,19 @@ const ProductDetail = () => {
                 ))
               }
             </div>
+          
+
             <div className="bg-orange-100 h-[80px] w-[400px] mt-5 flex items-center justify-between px-2">
-              <div><input type="checkbox" className="w-6 h-6"/></div>
-              <div className="text-sm">Add Gift Wrap  <br/>
-                Cost: Rs 199  <br/>
+              <div><input type="checkbox" className="w-6 h-6" /></div>
+              <div className="text-sm">Add Gift Wrap  <br />
+                Cost: Rs 199  <br />
                 Make it Memorable - Add Gift Wrapping!</div>
 
-              <div><img src="/assets/gift.webp" className="w-[80px]"/></div>
+              <div><img src="/assets/gift.webp" className="w-[80px]" /></div>
             </div>
             <div className=" mt-3 space-x-2">
-              <button className="bg-orange-500 text-white w-[170px] py-2 text-sm" onClick={addToCart}>Add to Cart</button>
-              <button className="bg-blue-500 text-white w-[170px] py-2 text-sm">Add to Favorite</button> 
+              <button className="bg-orange-500 text-white w-[170px] py-2 text-sm" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+              <button className="bg-blue-500 text-white w-[170px] py-2 text-sm" onClick={() => handleAddToFavorite(product.id)}>Add to Favorite</button>
             </div>
           </div>
         </div>
@@ -145,5 +126,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-
 

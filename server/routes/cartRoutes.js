@@ -62,4 +62,22 @@ router.post("/add-to-cart", async (req, res) => {
     }
 });
 
+
+router.get("/cartData", (req,res) => {
+    UserModel.find({})
+    .then((result) => {
+        console.log("sending data to frontend");
+        res.json({loggedInUsers:result});
+
+    }).catch((err) => {
+        console.log(err);
+        res.json({message:err})
+        
+    })
+})
+
+
+
+
+
 module.exports = router;

@@ -59,7 +59,7 @@ const MobileData = [
         off:0,
         oldPrice:4099,
         image:"/assets/mobileimages/mobile3.webp",
-        storage:[{size:"standard"}],
+        storage:[{size:"standard",price:4099}],
         gallary:["/assets/mobileimages/mobile3.webp"],
         colors:["/assets/mobileimages/mobile3.webp","/assets/mobileimages/mobile3blue.webp","/assets/mobileimages/mobile3golder.webp"],
         colorName:["Dreamy Purple","Aurora Blue","Golden"]

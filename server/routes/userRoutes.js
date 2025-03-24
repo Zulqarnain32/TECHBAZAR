@@ -25,4 +25,6 @@ router.get("/user", verifyToken,authrizedRole("admin","manager","user"),(req,res
 })
 
 
+
+
 module.exports = router
