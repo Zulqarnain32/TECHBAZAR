@@ -18,8 +18,10 @@ const Login = () => {
       e.preventDefault()    
       axios.post('http://localhost:5000/api/auth/login',{email,password})
       .then(result => {
+        console.log(result)
           if(result?.data?.message == "sucessfully login"){
             window.localStorage.setItem("id",result.data.id)
+            // window.localStorage.setItem("token",result.da)
             window.localStorage.setItem("user", JSON.stringify(result.data));
             console.log("login ho geya");
             setCookies("access_token",result.data.id)

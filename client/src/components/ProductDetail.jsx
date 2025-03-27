@@ -1,90 +1,100 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import data from "../global/EarbirdsData";
 import { IoIosStar } from "react-icons/io";
-import { useDispatch } from "react-redux"
-import { addProduct } from "../store/slices/ProductSlices";
-import { addToFav } from "../store/slices/FavoriteSlices";
-
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const product = data.find((item) => item.id === parseInt(id));
-  const [image, setImage] = useState([product.image])
+  const [product, setProduct] = useState(null);
+  const [image, setImage] = useState("");
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/products/${id}`)
+      .then((response) => {
+        setProduct(response.data);
+        setImage(response.data.image);
+        console.log("detail page ", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching product:", error);
+      });
+  }, [id]);
 
-  const handleAddToCart = (id) => {
-    console.log("you click on ", data[id].name);
-    dispatch(addProduct(data[id]))
-  }
+  const handleAddToCart = () => {};
 
+  const handleAddToFavorite = () => {};
 
   const changeImage = (imageAddress) => {
-    setImage([imageAddress])
-  }
-
-
-
-
-  const handleAddToFavorite = async (id) => {
-    console.log("you clicked on ", data[id].name);
-    dispatch(addToFav(data[id]))
-
-  }
-
-
+    setImage(imageAddress);
+  };
 
   if (!product) {
-    return <h1 className="text-center text-red-500">Product Not Found</h1>;
+    return <h1 className="text-center text-red-500">Loading Product...</h1>;
   }
 
   return (
     <div className="xs:w-[95%]">
-      <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)]  space-x-5">
-        <div className="w-1/2 xs:w-full  flex justify-end xs:justify-center">
+      <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)] space-x-5">
+        <div className="w-1/2 xs:w-full flex justify-end xs:justify-center">
           <div>
-            <img
-              src={image}
-              className="w-[400px] mx-auto border-2 rounded-3xl"
-            />
-            <div className="flex justify-center space-x-5 mt-2">
-              {
-                product.gallary.map((prod, i) => (
+            <div>
+              <img
+                src={image}
+                className="w-[400px] mx-auto border-2 rounded-3xl"
+              />
+              <div className="flex justify-center space-x-5 mt-2">
+                {product.gallary.map((prod, i) => (
                   <div
                     key={i}
-                    className="border-2 rounded-lg p-1"
-                    onClick={() => changeImage(product.gallary[i])}>
-                    <img src={product.gallary[i]} className="w-[40px] mx-auto" />
+                    tabIndex={0}
+                    className="border-2 rounded-lg p-1 border-gray-200  cursor-pointer focus:border-blue-400"
+                    onClick={() => changeImage(product.gallary[i])}
+                  >
+                    <img
+                      src={product.gallary[i]}
+                      className="w-[40px] mx-auto"
+                    />
                   </div>
-
-                ))
-              }
-
+                ))}
+              </div>
             </div>
           </div>
         </div>
         <div className="w-1/2 xs:w-full">
-          <div>
-            <h1 className="font-semibold text-3xl">{product.name}</h1>
-            <div className="flex space-x-3 bg-orange-100 mt-2 w-[250px] px-1 h-[30px] rounded-lg leading-[30px]">
-              <div className="flex text-yellow-400 leading-[30px] space-x-1">
-                <IoIosStar className="mt-1.5" />
-                <IoIosStar className="mt-1.5" />
-                <IoIosStar className="mt-1.5" />
-                <IoIosStar className="mt-1.5" />
-                <IoIosStar className="mt-1.5" />
-              </div>
-              <div>5.0</div>
-              <div>13 Reviews</div>
+          <h1 className="font-semibold text-3xl">{product.name}</h1>
+          <div className="flex space-x-3 bg-orange-100 mt-2 w-[250px] px-1 h-[30px] rounded-lg leading-[30px]">
+            <div className="flex text-yellow-400 leading-[30px] space-x-1">
+              <IoIosStar className="mt-1.5" />
+              <IoIosStar className="mt-1.5" />
+              <IoIosStar className="mt-1.5" />
+              <IoIosStar className="mt-1.5" />
+              <IoIosStar className="mt-1.5" />
             </div>
-            <h1 className="mt-4 text-gray-400">Techbazar Price</h1>
-            <div className="text-2xl relative font-semibold">Rs <span className="text-4xl absolute top-3 left-8">{product.price}</span></div>
-            <div className="mt-7 flex space-x-16">
-              <div className="relative text-gray-400">Rs  <span className="absolute top-1 left-5"><strike> {product.oldPrice}</strike></span></div>
-              <div className="bg-green-100 text-green-600 px-3 py-1 rounded-md ">{product.off}% OFF</div>
+            <div>5.0</div>
+            <div>13 Reviews</div>
+          </div>
+          {/* <h2 className="text-2xl font-semibold">Rs {product.price}</h2> */}
+          <h1 className="mt-4 text-gray-400">Techbazar Price</h1>
+          <div className="text-2xl relative font-semibold">
+            Rs{" "}
+            <span className="text-4xl absolute top-3 left-8">
+              {product.price}
+            </span>
+          </div>
+          <div className="mt-7 flex space-x-16">
+            <div className="relative text-gray-400">
+              Rs{" "}
+              <span className="absolute top-1 left-5">
+                <strike> {product.oldPrice}</strike>
+              </span>
             </div>
-            <h1 className="mt-3 mb-2">Colors</h1>
+            <div className="bg-green-100 text-green-600 px-3 py-1 rounded-md ">
+              {product.off}% OFF
+            </div>
+          </div>
+          <h1 className="mt-3 mb-2">Colors</h1>
             <div className="flex space-x-3">
               {
                 product.colors.map((prod, i) => (
@@ -102,28 +112,39 @@ const ProductDetail = () => {
                 ))
               }
             </div>
-          
 
-            <div className="bg-orange-100 h-[80px] w-[400px] mt-5 flex items-center justify-between px-2">
-              <div><input type="checkbox" className="w-6 h-6" /></div>
-              <div className="text-sm">Add Gift Wrap  <br />
-                Cost: Rs 199  <br />
-                Make it Memorable - Add Gift Wrapping!</div>
 
-              <div><img src="/assets/gift.webp" className="w-[80px]" /></div>
+          <div className="bg-orange-100 h-[80px] w-[400px] mt-5 flex items-center justify-between px-2">
+            <div>
+              <input type="checkbox" className="w-6 h-6" />
             </div>
-            <div className=" mt-3 space-x-2">
-              <button className="bg-orange-500 text-white w-[170px] py-2 text-sm" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
-              <button className="bg-blue-500 text-white w-[170px] py-2 text-sm" onClick={() => handleAddToFavorite(product.id)}>Add to Favorite</button>
+            <div className="text-sm">
+              Add Gift Wrap <br />
+              Cost: Rs 199 <br />
+              Make it Memorable - Add Gift Wrapping!
+            </div>
+
+            <div>
+              <img src="/assets/gift.webp" className="w-[80px]" />
             </div>
           </div>
+
+          <button
+            className="bg-orange-500 text-white w-[170px] py-2 text-sm mt-3"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+          <button
+            className="bg-blue-500 text-white w-[170px] py-2 text-sm mt-3 ml-2"
+            onClick={handleAddToFavorite}
+          >
+            Add to Favorite
+          </button>
         </div>
       </div>
     </div>
-
-
   );
 };
 
 export default ProductDetail;
-

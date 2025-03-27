@@ -1,11 +1,30 @@
-import React from 'react'
+import React,{ useState,useContext,useEffect } from 'react'
 import {FaStar} from "react-icons/fa"
-import data from "../global/EarbirdsData"
-import data1 from "../global/MobileData"
-import data2 from "../global/WatchedData"
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../global/AuthContext' 
+import axios from "axios"
+
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const { user } = useContext(AuthContext);
+  const userId = user?.id;
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/products/fetch")
+      .then((result) => {
+        setProducts(result.data);
+        console.log("product ",result.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
  const navigate = useNavigate()
 
@@ -18,7 +37,7 @@ const Products = () => {
              </div>
              <div className='w-[80%] '>
                 <div className='flex flex-wrap justify-between border '>
-                  {data.map((product,index) => (
+                  {products.map((product,index) => (
                     <div key={index}>
                       <div className=' py-4 px-2  mb-3 border bg-white'>
                          <div className=''>
@@ -31,9 +50,7 @@ const Products = () => {
                            </span>
                            </div>
                            <div className='flex justify-between mt-3'>
-                             {/* <div className='bg-blue-500 hover:bg-blue-700 text-white cursor-pointer px-2 py-1' onClick={() => handleAddProduct(product.id)}>Buy Now </div> */}
-                             <div className='bg-blue-500 hover:red-blue-700 text-white cursor-pointer px-2 py-1 w-full text-center'  onClick={() => navigate(`/products/${product.id}`)}>Detail </div>
-                             {/* <div className='text-2xl cursor-pointer' onClick={() => handleFavorite(product.id)}>💙</div> */}
+                             <div className='bg-blue-500 hover:red-blue-700 text-white cursor-pointer px-2 py-1 w-full text-center'  onClick={() => navigate(`/products/${product._id}`)}>Detail </div>
                            </div>
                          </div>
                       </div>

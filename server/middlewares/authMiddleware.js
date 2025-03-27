@@ -8,7 +8,11 @@ const verifyToken = (req, res, next) => {
     token = authHeader.split(" ")[1];
   }
 
+  if(token){
+    console.log("token hega")
+  }
   if (!token) {
+    console.log("token kithy")
     return res
       .status(401)
       .json({ message: "No token, authorization denied" });

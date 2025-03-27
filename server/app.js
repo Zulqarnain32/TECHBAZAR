@@ -4,6 +4,7 @@ const dbConnect = require("./dbConfig/dbConnect")
 const authRoutes = require("./routes/authRoutes")
 const userRoutes = require("./routes/userRoutes")
 const cartRoutes = require("./routes/cartRoutes")
+const productRoute = require("./routes/productRoute")
 const cors = require("cors");
 const Usermodel = require("./models/UserModel");
 
@@ -28,8 +29,7 @@ app.get("/dashboard", async (req, res) => {
 
 app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
-// app.use("/api/cart", cartRoutes);
-app.use("/api/cart", cartRoutes);
+app.use("/api/products", productRoute);
 
 const PORT = 5000;
 
