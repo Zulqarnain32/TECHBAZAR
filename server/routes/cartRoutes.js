@@ -1,71 +1,126 @@
-
 const express = require("express");
-const mongoose = require("mongoose");
-const UserModel = require("../models/UserModel");
-
+const User = require("../models/UserModel");
+const Product = require("../models/productModel");
 const router = express.Router();
+const mongoose = require("mongoose");
 
-// Add to Cart Route
-router.post("/add-to-cart", async (req, res) => {
-    console.log("API HIT: Add to Cart");
+router.post("/add", async (req, res) => {
+  console.log("cart add hit");
 
-    try {
-        const { userId, product } = req.body;
-        console.log("Received userId:", userId);
-        console.log("Received product:", product);
+  try {
+    const { userId, productId } = req.body;
 
-        // Validate userId
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
-            return res.status(400).json({ error: "Invalid user ID format" });
-        }
+    console.log("Received User ID:", userId);
+    console.log("Received Product ID:", productId);
 
-        // Find the user
-        const user = await UserModel.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        console.log("User found:", user);
-
-        // Check if product already exists in cart
-        const existingProduct = user.cart.find((item) => 
-            item.productId.toString() === product.productId
-        );
-
-        if (existingProduct) {
-            return res.status(400).json({ error: "Product already in cart" });
-        }
-
-        // Add product to cart
-        user.cart.push({
-            productId: new mongoose.Types.ObjectId(product.productId), // Ensure ObjectId format
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            rating:product.rating,
-            oldPrice:product.oldPrice,
-            off:product.off,
-            reviews:product.reviews,
-            quantity: product.quantity || 1, 
-            colorName:product.colorName
-
-        });
-        
-
-        await user.save();
-        console.log("Cart updated:", user.cart);
-
-        res.status(200).json({ message: "Product added to cart", cart: user.cart });
-
-    } catch (error) {
-        console.error("Error adding to cart:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid Product ID" });
     }
+
+    if (!userId || !productId) {
+      return res
+        .status(400)
+        .json({ message: "User ID and Product ID are required" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const product = await Product.findById(productId);
+    console.log(product);
+    if (!product) {
+      console.log("not product found");
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const existingProduct = user.cart.find(
+      (item) => item.productId.toString() === productId
+    );
+
+    if (existingProduct) {
+      existingProduct.quantity += 1; // Increase quantity if item already exists
+      user.save()
+      return res.json({message:"product already exist",cart: user.cart})
+    } else {
+      user.cart.push({
+        productId: product._id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        category: product.category,
+        description: product.description,
+        stock: product.stock,
+        rating:product.rating,
+        oldPrice:product.oldPrice,
+        image:product.image,
+        reviews:product.reviews,
+        gallary:product.gallary,
+        colorName:product.colorName,
+        colors:product.colors
+      });
+    }
+
+    await user.save();
+    res.json({
+      message: "Product added",
+      cart: user.cart,
+    });
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 
+
+router.get("/usercart/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid User ID" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ cart: user.cart });
+  } catch (err) {
+    console.log("Error fetching user cart:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// remove product from user Schema
+router.delete("/remove", async (req, res) => {
+  try {
+    const { userId, productId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid User ID or Product ID" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Filter out the product from the cart
+    user.cart = user.cart.filter(item => item.productId.toString() !== productId);
+
+    await user.save();
+    res.json({ message: "Product removed from cart", cart: user.cart });
+  } catch (error) {
+    console.error("Error removing from cart:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
 module.exports = router;
-
-
-
-

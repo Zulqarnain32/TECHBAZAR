@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { useParams } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { AuthContext } from "../global/AuthContext"
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [image, setImage] = useState("");
+  const { user } = useContext(AuthContext);
+  const userId = user?.id;
+
 
   useEffect(() => {
     axios
@@ -15,20 +18,40 @@ const ProductDetail = () => {
       .then((response) => {
         setProduct(response.data);
         setImage(response.data.image);
-        console.log("detail page ", response.data);
+        // console.log("detail page ", response.data);
       })
       .catch((error) => {
         console.error("Error fetching product:", error);
       });
   }, [id]);
 
-  const handleAddToCart = () => {};
-
-  const handleAddToFavorite = () => {};
+  const handleAddToCart = (product) => {
+    console.log(product._id)
+    axios
+      .post("http://localhost:5000/api/cart/add", {
+        userId,
+        productId: product._id,
+      })
+      .then((result) => {
+        console.log(result.data.cart);
+        if (result.data.message === "Product added") {
+          console.log("product added");
+        }
+        if (result.data.message === "product already exist") {
+          console.log("product already exist");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const changeImage = (imageAddress) => {
     setImage(imageAddress);
   };
+  const  handleAddToFavorite = () => {
+
+  }
 
   if (!product) {
     return <h1 className="text-center text-red-500">Loading Product...</h1>;
@@ -131,7 +154,7 @@ const ProductDetail = () => {
 
           <button
             className="bg-orange-500 text-white w-[170px] py-2 text-sm mt-3"
-            onClick={handleAddToCart}
+            onClick={() => handleAddToCart(product)}
           >
             Add to Cart
           </button>
