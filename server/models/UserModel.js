@@ -21,6 +21,22 @@ const userSchema = new mongoose.Schema({
         colorName: { type: Array,  },
         gallary: { type: Array,  },
 
+    }], default: [] },
+    favorites: { type: [{
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        name: { type: String,  },
+        price: { type: Number,  },
+        rating: { type: String,  },
+        category: { type: String,  },
+        image: { type: String,  },
+        stock: { type: Number,  },
+        // oldPrice: { type: Number,  },
+        // reviews: { type: Number,  },
+        // off: { type: Number,  },
+        // colors: { type: Array,  },
+        // colorName: { type: Array,  },
+        // gallary: { type: Array,  },
+
     }], default: [] }
 });
 

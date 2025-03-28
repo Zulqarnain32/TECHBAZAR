@@ -11,7 +11,7 @@ const Products = () => {
   const userId = user?.id;
 
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, [user]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Products = () => {
       .get("http://localhost:5000/api/products/fetch")
       .then((result) => {
         setProducts(result.data);
-        console.log("product ",result.data)
+        // console.log("product ",result.data)
       })
       .catch((err) => {
         console.log(err);

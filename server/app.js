@@ -5,6 +5,7 @@ const authRoutes = require("./routes/authRoutes")
 const userRoutes = require("./routes/userRoutes")
 const cartRoutes = require("./routes/cartRoutes")
 const productRoute = require("./routes/productRoute")
+const favoriteRoutes = require("./routes/favoriteRoutes")
 const cors = require("cors");
 const Usermodel = require("./models/UserModel");
 
@@ -31,6 +32,7 @@ app.use("/api/auth",authRoutes)
 app.use("/api/cart", cartRoutes);
 app.use("/api/users",userRoutes)
 app.use("/api/products", productRoute);
+app.use("/api/favorites", favoriteRoutes);
 
 const PORT = 5000;
 

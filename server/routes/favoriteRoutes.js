@@ -5,13 +5,13 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 router.post("/add", async (req, res) => {
-  console.log("cart add hit");
+  console.log("favorite add hit");
 
   try {
     const { userId, productId } = req.body;
 
-    console.log("Cart Received User ID:", userId);
-    console.log("Cart Received Product ID:", productId);
+    console.log("Received User ID:", userId);
+    console.log("Received Product ID:", productId);
 
     if (!mongoose.Types.ObjectId.isValid(productId)) {
       return res.status(400).json({ message: "Invalid Product ID" });
@@ -29,7 +29,7 @@ router.post("/add", async (req, res) => {
     }
 
     const product = await Product.findById(productId);
-    // console.log(product);
+    console.log(product);
     if (!product) {
       console.log("not product found");
       return res.status(404).json({ message: "Product not found" });
@@ -40,41 +40,42 @@ router.post("/add", async (req, res) => {
     );
 
     if (existingProduct) {
-      existingProduct.quantity += 1; // Increase quantity if item already exists
+      existingProduct.quantity += 0; //   if item already exists
       user.save()
       return res.json({message:"product already exist",cart: user.cart})
     } else {
-      user.cart.push({
+      user.favorites.push({
         productId: product._id,
         name: product.name,
         price: product.price,
         quantity: 1,
-        category: product.category,
-        description: product.description,
         stock: product.stock,
-        rating:product.rating,
-        oldPrice:product.oldPrice,
         image:product.image,
-        reviews:product.reviews,
-        gallary:product.gallary,
-        colorName:product.colorName,
-        colors:product.colors
+        // category: product.category,
+        // description: product.description,
+        // rating:product.rating,
+        // oldPrice:product.oldPrice,
+        // reviews:product.reviews,
+        // gallary:product.gallary,
+        // colorName:product.colorName,
+        // colors:product.colors
       });
     }
 
     await user.save();
     res.json({
       message: "Product added",
-      cart: user.cart,
+      favorites: user.favorites,
     });
   } catch (error) {
-    console.error("Error adding to cart:", error);
+    console.error("Error adding to favorite:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
 
-router.get("/usercart/:userId", async (req, res) => {
+
+router.get("/userfavorite/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
 
@@ -88,7 +89,7 @@ router.get("/usercart/:userId", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.json({ cart: user.cart });
+    res.json({ favorites: user.favorites });
   } catch (err) {
     console.log("Error fetching user cart:", err);
     res.status(500).json({ message: "Server error" });
@@ -110,12 +111,12 @@ router.delete("/remove", async (req, res) => {
     }
 
     // Filter out the product from the cart
-    user.cart = user.cart.filter(item => item.productId.toString() !== productId);
+    user.favorites = user.favorites.filter(item => item.productId.toString() !== productId);
 
     await user.save();
-    res.json({ message: "Product removed from cart", cart: user.cart });
+    res.json({ message: "Product removed from favorite", favorites: user.favorites });
   } catch (error) {
-    console.error("Error removing from cart:", error);
+    console.error("Error removing from favorite:", error);
     res.status(500).json({ message: "Server error" });
   }
 });

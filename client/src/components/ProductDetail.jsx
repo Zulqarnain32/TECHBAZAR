@@ -33,7 +33,7 @@ const ProductDetail = () => {
         productId: product._id,
       })
       .then((result) => {
-        console.log(result.data.cart);
+        // console.log(result.data.cart);
         if (result.data.message === "Product added") {
           console.log("product added");
         }
@@ -46,12 +46,33 @@ const ProductDetail = () => {
       });
   };
 
+  const handleAddToFavorite = (product) => {
+    console.log("favorite ", product._id)
+    axios
+      .post("http://localhost:5000/api/favorites/add", {
+        userId,
+        productId: product._id,
+      })
+      .then((result) => {
+        console.log("then part not")
+        console.log(result.data.favorites);
+        if (result.data.message === "Product added") {
+          console.log("product added");
+        }
+        if (result.data.message === "product already exist") {
+          console.log("product already exist");
+        }
+      })
+      .catch((err) => {
+        console.log("catch part yses")
+        console.log(err);
+      });
+  };
+
   const changeImage = (imageAddress) => {
     setImage(imageAddress);
   };
-  const  handleAddToFavorite = () => {
 
-  }
 
   if (!product) {
     return <h1 className="text-center text-red-500">Loading Product...</h1>;
@@ -160,7 +181,7 @@ const ProductDetail = () => {
           </button>
           <button
             className="bg-blue-500 text-white w-[170px] py-2 text-sm mt-3 ml-2"
-            onClick={handleAddToFavorite}
+            onClick={() => handleAddToFavorite(product)}
           >
             Add to Favorite
           </button>
