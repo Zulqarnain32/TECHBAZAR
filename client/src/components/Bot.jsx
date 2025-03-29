@@ -117,7 +117,7 @@ const Bot = () => {
             <div>
                <div
                   onClick={() => SetOpenBot(true)}
-                  className="fixed bottom-16 right-10 xs:right-4 bg-red-500 text-white cursor-pointer h-12 w-12 leading-[48px] border rounded-full text-center"
+                  className="fixed bottom-16 z-50 right-10 xs:right-4 bg-red-500 text-white cursor-pointer h-12 w-12 leading-[48px] border rounded-full text-center"
                >
                   Chat
                </div>

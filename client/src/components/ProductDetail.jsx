@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 import axios from "axios";
 import { AuthContext } from "../global/AuthContext"
+import { useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const ProductDetail = () => {
   const [image, setImage] = useState("");
   const { user } = useContext(AuthContext);
   const userId = user?.id;
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -36,9 +38,13 @@ const ProductDetail = () => {
         // console.log(result.data.cart);
         if (result.data.message === "Product added") {
           console.log("product added");
+          alert("Product has added to your cart")
+          navigate("/cart")
         }
         if (result.data.message === "product already exist") {
           console.log("product already exist");
+          alert("Product already exists in your cart")
+          navigate("/cart")
         }
       })
       .catch((err) => {
@@ -54,17 +60,19 @@ const ProductDetail = () => {
         productId: product._id,
       })
       .then((result) => {
-        console.log("then part not")
         console.log(result.data.favorites);
         if (result.data.message === "Product added") {
           console.log("product added");
+          alert("product has added to your favorite")
+          navigate("/favorite")
         }
         if (result.data.message === "product already exist") {
           console.log("product already exist");
+          alert("product has already exists to your favorite")
+          navigate("/favorite")
         }
       })
       .catch((err) => {
-        console.log("catch part yses")
         console.log(err);
       });
   };

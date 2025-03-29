@@ -35,14 +35,15 @@ router.post("/add", async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const existingProduct = user.cart.find(
+    const existingProduct = user.favorites.find(
       (item) => item.productId.toString() === productId
     );
 
     if (existingProduct) {
+      console.log("already exist")
       existingProduct.quantity += 0; //   if item already exists
       user.save()
-      return res.json({message:"product already exist",cart: user.cart})
+      return res.json({message:"product already exist",favorites: user.favorites})
     } else {
       user.favorites.push({
         productId: product._id,

@@ -41,6 +41,7 @@ router.post("/add", async (req, res) => {
 
     if (existingProduct) {
       existingProduct.quantity += 1; // Increase quantity if item already exists
+      console.log("quantity ", existingProduct.quantity)
       user.save()
       return res.json({message:"product already exist",cart: user.cart})
     } else {
