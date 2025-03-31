@@ -10,7 +10,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [image, setImage] = useState("");
   const { user } = useContext(AuthContext);
-  const userId = user?.id;
+  const userId = user?.id || user?._id;
   const navigate = useNavigate()
 
 

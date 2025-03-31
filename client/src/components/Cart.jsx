@@ -6,13 +6,15 @@ import { AuthContext } from "../global/AuthContext";
 const Cart = () => {
   const [cart, setCart] = useState(null); // Initially null to differentiate between loading and empty
   const { user } = useContext(AuthContext);
-  const userId = user?.id;
+  const userId = user?.id || user?._id; // Ensure it works for both normal & Google users
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      console.log("user id is missing")
+    };
 
     axios
-      .get(`http://localhost:5000/api/cart/usercart/${userId}`)
+      .get(`http://localhost:5000/api/cart/usercart/${userId}`, { withCredentials: true })
       .then((result) => {
         console.log("Fetched cart:", result.data.cart);
         setCart(result.data.cart);
@@ -32,6 +34,7 @@ const Cart = () => {
     axios
       .delete("http://localhost:5000/api/cart/remove", {
         data: { userId, productId },
+        withCredentials: true, // Ensure cookies are sent with the request
       })
       .then((result) => {
         console.log("Cart after removal:", result.data.cart);
@@ -86,4 +89,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart

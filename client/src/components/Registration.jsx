@@ -27,7 +27,9 @@ const Registration = () => {
       }).catch(err => {
         setError(err.response?.data?.message || "Something went wrong");
       });
+      
   }
+
 
   return (
     <div className="flex justify-center items-center h-[calc(100vh-70px)] bg-gray-100">
@@ -60,6 +62,7 @@ const Registration = () => {
           >
             Register
           </button>
+         
 
           {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
 
@@ -71,6 +74,8 @@ const Registration = () => {
           >
             Already have an Account
           </Link>
+         
+          
         </form>
       </div>
     </div>

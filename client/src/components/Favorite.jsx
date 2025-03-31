@@ -5,7 +5,7 @@ import { AuthContext } from "../global/AuthContext";
 const Favorite = () => {
   const [favorites, setFavorites] = useState(null); // Initially null to differentiate between loading and empty
   const { user } = useContext(AuthContext);
-  const userId = user?.id;
+  const userId = user?.id || user?._id;
 
   useEffect(() => {
     if (!userId) return;

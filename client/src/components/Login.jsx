@@ -45,6 +45,11 @@ const Login = () => {
           console.log(result)    
       }).catch(err => console.log(err))
   }
+
+  
+  const openWithGoogle = () => {
+    window.open("http://localhost:5000/auth/google/callback","_self")
+  }
   return (
     <div className="flex justify-center items-center h-[calc(100vh-70px)] bg-gray-100">
       <div className="bg-white p-6 w-80 rounded-lg shadow-lg ">
@@ -70,6 +75,14 @@ const Login = () => {
           >
             Log In
           </button>
+          <div onClick={openWithGoogle} className='border-2 mt-6 flex items-center py-1 justify-center space-x-3 cursor-pointer rounded-md'>
+             <img 
+               src="/assets/google.png"  
+               className='w-[20px]'
+              />
+              <p >Sign in with Google</p>
+
+          </div>
           {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
           
           <Link to = "/forgot-password" className="text-blue-600 text-center mt-3 text-sm hover:underline">
