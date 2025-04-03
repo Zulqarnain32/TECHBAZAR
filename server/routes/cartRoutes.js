@@ -173,7 +173,7 @@ router.put("/decrease", async (req, res) => {
     
 
   if(cartItem.quantity > 1){
-    cartItem.quantity -= 1; // Increment quantity
+    cartItem.quantity -= 1; // decrement quantity
     await user.save();
   }
 

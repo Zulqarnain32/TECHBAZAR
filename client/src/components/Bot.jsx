@@ -52,7 +52,7 @@ const Bot = () => {
          console.error("Error fetching response: ", error);
          setMessages([
             ...newMessages,
-            { text: "I think you're disconnected.", sender: "bot" },
+            { text: "Something went wrong.", sender: "bot" },
          ]);
       } finally {
          setTimeout(() => setThinking(false), 300); // Small delay for smooth transition

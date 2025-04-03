@@ -66,9 +66,31 @@ const decrQuantity = (productId) => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1>
-      <div className="flex items-center">
-        <div className="w-[70%]">Contact Information</div>
+      {/* <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1> */}
+      <div className="flex  space-x-1 mt-6">
+        <div className="w-[70%] ">
+          <div className="h-[160px] p-6 bg-gray-200">
+          <input 
+  className="py-1 px-2 w-[250px] text-sm h-10  border-2 focus:border-black focus:ring-7 outline-none"  
+  placeholder="Whatsapp Number" 
+/>
+
+            <div className="mt-6">
+              <button className="bg-blue-500 text-white cursor-pointer py-2 px-2">Request OPT</button>
+            </div>
+          </div>
+          <div className="bg-gray-200 mt-6 p-6">
+            <p>Contact Information</p>
+          </div>
+          <div className="bg-gray-200 mt-6 p-6">
+            <p>Delivery Information</p>
+          </div>
+          <div className="bg-gray-200 mt-6 p-6">
+            <p>Payment  Information</p>
+          </div>
+        
+
+        </div>
 
         <div className="w-[30%]">
           {cart === null ? (
