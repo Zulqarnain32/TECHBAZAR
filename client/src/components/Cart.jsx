@@ -43,6 +43,27 @@ const Cart = () => {
       .catch((err) => console.log("Error removing product:", err));
   };
 
+ const incrQuantity = (productId) => {
+  axios
+    .put("http://localhost:5000/api/cart/increase", { userId, productId }, { withCredentials: true })
+    .then((result) => {
+      console.log("Cart after increment:", result.data.cart);
+      setCart(result.data.cart);
+    })
+    .catch((err) => console.log("Error increasing quantity:", err));
+};
+
+
+const decrQuantity = (productId) => {
+  axios
+  .put("http://localhost:5000/api/cart/decrease", { userId, productId }, { withCredentials: true })
+    .then((result) => {
+      console.log("Cart after decrement:", result.data.cart);
+      setCart(result.data.cart);
+    })
+    .catch((err) => console.log("Error decreasing quantity:", err));
+}
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1>
@@ -67,11 +88,15 @@ const Cart = () => {
                     <div className="flex justify-between">
                       <div className="font-bold text-xl">Rs {item.price}</div>
                       <div className="flex space-x-3 select-none">
-                        <div className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-4 text-center text-2xl">
+                        <div 
+                         onClick={() => decrQuantity(item.productId)}
+                         className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-4 text-center text-2xl">
                           -
                         </div>
                         <div>{item.quantity}</div>
-                        <div className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-5 text-center">
+                        <div
+                         onClick={() => incrQuantity(item.productId)}
+                         className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-5 text-center">
                           +
                         </div>
                       </div>

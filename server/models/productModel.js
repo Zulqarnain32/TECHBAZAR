@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema({
     colors: { type: Array, required: true },
     colorName: { type: Array, required: true },
     gallary: { type: Array, required: true },
+
 });
 
 const Product = mongoose.model("Product", productSchema);

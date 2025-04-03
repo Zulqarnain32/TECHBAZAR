@@ -122,5 +122,69 @@ router.delete("/remove", async (req, res) => {
 });
 
 
+// increment the quantity 
+router.put("/increase", async (req, res) => {
+  try {
+    const { userId, productId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid User ID or Product ID" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const cartItem = user.cart.find(item => item.productId.toString() === productId);
+    if (!cartItem) {
+      return res.status(404).json({ message: "Product not found in cart" });
+    }
+
+    cartItem.quantity += 1; // Increment quantity
+    await user.save();
+
+    res.json({ message: "Quantity increased", cart: user.cart });
+  } catch (error) {
+    console.error("Error increasing quantity:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+// decrement the quantity 
+router.put("/decrease", async (req, res) => {
+  try {
+    const { userId, productId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid User ID or Product ID" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const cartItem = user.cart.find(item => item.productId.toString() === productId);
+    if (!cartItem) {
+      return res.status(404).json({ message: "Product not found in cart" });
+    }
+    
+
+  if(cartItem.quantity > 1){
+    cartItem.quantity -= 1; // Increment quantity
+    await user.save();
+  }
+
+    res.json({ message: "Quantity decreased", cart: user.cart });
+  } catch (error) {
+    console.error("Error decreasing quantity:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
 
 module.exports = router;

@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
         colors: { type: Array },
         colorName: { type: Array },
         gallary: { type: Array },
+        quantity: { type: Number, required: true, default: 1 }
       },
     ],
     default: [],

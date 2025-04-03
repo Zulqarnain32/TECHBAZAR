@@ -43,16 +43,15 @@ const Navbar = () => {
   const handleLogout = () => {
     setCookies("access_token", ""); // Remove JWT token
     window.localStorage.removeItem("user"); // Remove local user
-    window.location.reload()
-    axios.get("http://localhost:5000/logout", { withCredentials: true }) // Clear Google session
+    window.location.reload();
+    axios
+      .get("http://localhost:5000/logout", { withCredentials: true }) // Clear Google session
       .then(() => {
         setUser(null);
         window.location.reload();
       })
       .catch((err) => console.log("Logout error:", err));
-};
-
-  
+  };
 
   useEffect(() => {
     if (showNavbar) {
@@ -116,21 +115,15 @@ const Navbar = () => {
             DASHBOARD
           </Link>
         )}
-        {/* {(user?.username || userData?.displayName) && (
+
+        {user && (
           <Link
-            className="text-red-500 md:text-red-500  block py-4 px-4 border-b md:border-0"
+            className="text-red-500 md:text-red-500 block py-4 px-4 border-b md:border-0"
             onClick={closeNav}
           >
-            {user?.username || userData?.displayName}
+            {user.username || user.displayName}
           </Link>
-        )} */}
-
-{user && (
-  <Link className="text-red-500 md:text-red-500 block py-4 px-4 border-b md:border-0" onClick={closeNav}>
-    {user.username || user.displayName} 
-  </Link>
-)}
-
+        )}
 
         <Link
           to="/cart"
@@ -145,19 +138,22 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {(user?.username || userData?.email) ? (
-  <button
-    onClick={handleLogout}
-    className="text-white block py-1.5 xs:m-3  px-3  md:border-0 cursor-pointer bg-red-500 "
-  >
-    LOGOUT
-  </button>
-) : (
-  <Link to="/login" className="text-white block py-1.5 xs:py-4 px-3 border-b md:border-0 bg-red-500" onClick={closeNav}>
-    LOGIN
-  </Link>
-)}
-
+        {user?.username || userData?.email ? (
+          <button
+            onClick={handleLogout}
+            className="text-white block py-1.5 xs:m-3  px-3  md:border-0 cursor-pointer bg-red-500 "
+          >
+            LOGOUT
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="text-white block py-1.5 xs:py-4 px-3 border-b md:border-0 bg-red-500"
+            onClick={closeNav}
+          >
+            LOGIN
+          </Link>
+        )}
       </div>
     </div>
   );
