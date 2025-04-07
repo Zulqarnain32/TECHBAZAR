@@ -10,11 +10,13 @@ const Cart = () => {
 
   useEffect(() => {
     if (!userId) {
-      console.log("user id is missing")
-    };
+      console.log("user id is missing");
+    }
 
     axios
-      .get(`http://localhost:5000/api/cart/usercart/${userId}`, { withCredentials: true })
+      .get(`http://localhost:5000/api/cart/usercart/${userId}`, {
+        withCredentials: true,
+      })
       .then((result) => {
         console.log("Fetched cart:", result.data.cart);
         setCart(result.data.cart);
@@ -43,26 +45,33 @@ const Cart = () => {
       .catch((err) => console.log("Error removing product:", err));
   };
 
- const incrQuantity = (productId) => {
-  axios
-    .put("http://localhost:5000/api/cart/increase", { userId, productId }, { withCredentials: true })
-    .then((result) => {
-      console.log("Cart after increment:", result.data.cart);
-      setCart(result.data.cart);
-    })
-    .catch((err) => console.log("Error increasing quantity:", err));
-};
+  const incrQuantity = (productId) => {
+    axios
+      .put(
+        "http://localhost:5000/api/cart/increase",
+        { userId, productId },
+        { withCredentials: true }
+      )
+      .then((result) => {
+        console.log("Cart after increment:", result.data.cart);
+        setCart(result.data.cart);
+      })
+      .catch((err) => console.log("Error increasing quantity:", err));
+  };
 
-
-const decrQuantity = (productId) => {
-  axios
-  .put("http://localhost:5000/api/cart/decrease", { userId, productId }, { withCredentials: true })
-    .then((result) => {
-      console.log("Cart after decrement:", result.data.cart);
-      setCart(result.data.cart);
-    })
-    .catch((err) => console.log("Error decreasing quantity:", err));
-}
+  const decrQuantity = (productId) => {
+    axios
+      .put(
+        "http://localhost:5000/api/cart/decrease",
+        { userId, productId },
+        { withCredentials: true }
+      )
+      .then((result) => {
+        console.log("Cart after decrement:", result.data.cart);
+        setCart(result.data.cart);
+      })
+      .catch((err) => console.log("Error decreasing quantity:", err));
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -70,13 +79,15 @@ const decrQuantity = (productId) => {
       <div className="flex  space-x-1 mt-6">
         <div className="w-[70%] ">
           <div className="h-[160px] p-6 bg-gray-200">
-          <input 
-  className="py-1 px-2 w-[250px] text-sm h-10  border-2 focus:border-black focus:ring-7 outline-none"  
-  placeholder="Whatsapp Number" 
-/>
+            <input
+              className="py-1 px-2 w-[250px] text-sm h-10  border-2 focus:border-black focus:ring-7 outline-none"
+              placeholder="Whatsapp Number"
+            />
 
             <div className="mt-6">
-              <button className="bg-blue-500 text-white cursor-pointer py-2 px-2">Request OPT</button>
+              <button className="bg-blue-500 text-white cursor-pointer py-2 px-2">
+                Request OPT
+              </button>
             </div>
           </div>
           <div className="bg-gray-200 mt-6 p-6">
@@ -86,10 +97,8 @@ const decrQuantity = (productId) => {
             <p>Delivery Information</p>
           </div>
           <div className="bg-gray-200 mt-6 p-6">
-            <p>Payment  Information</p>
+            <p>Payment Information</p>
           </div>
-        
-
         </div>
 
         <div className="w-[30%]">
@@ -98,8 +107,15 @@ const decrQuantity = (productId) => {
           ) : cart.length > 0 ? (
             <div className="grid grid-cols-1 gap-6">
               {cart.map((item) => (
-                <div key={item.productId} className="flex items-center space-x-4 border-b py-2">
-                  <img src={item.image} alt={item.name} className="w-20 object-cover" />
+                <div
+                  key={item.productId}
+                  className="flex items-center space-x-4 border-b py-2"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-20 object-cover"
+                  />
                   <div className="w-full pr-4 flex flex-col justify-between h-full">
                     <div className="flex justify-between">
                       <h2 className="text-md font-semibold">{item.name}</h2>
@@ -110,15 +126,17 @@ const decrQuantity = (productId) => {
                     <div className="flex justify-between">
                       <div className="font-bold text-xl">Rs {item.price}</div>
                       <div className="flex space-x-3 select-none">
-                        <div 
-                         onClick={() => decrQuantity(item.productId)}
-                         className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-4 text-center text-2xl">
+                        <div
+                          onClick={() => decrQuantity(item.productId)}
+                          className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-4 text-center text-2xl"
+                        >
                           -
                         </div>
                         <div>{item.quantity}</div>
                         <div
-                         onClick={() => incrQuantity(item.productId)}
-                         className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-5 text-center">
+                          onClick={() => incrQuantity(item.productId)}
+                          className="h-6 w-6 border cursor-pointer hover:bg-gray-200 leading-5 text-center"
+                        >
                           +
                         </div>
                       </div>
@@ -128,7 +146,9 @@ const decrQuantity = (productId) => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500 text-lg">Your cart is empty.</p>
+            <p className="text-center text-gray-500 text-lg">
+              Your cart is empty.
+            </p>
           )}
         </div>
       </div>
@@ -136,4 +156,4 @@ const decrQuantity = (productId) => {
   );
 };
 
-export default Cart
+export default Cart;

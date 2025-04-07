@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 const express = require("express")
 const app = express();
 const dbConnect = require("./dbConfig/dbConnect")
@@ -13,14 +6,12 @@ const userRoutes = require("./routes/userRoutes")
 const cartRoutes = require("./routes/cartRoutes")
 const productRoute = require("./routes/productRoute")
 const favoriteRoutes = require("./routes/favoriteRoutes")
+const adminRoutes = require("./routes/adminRoutes")
 const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
 const OAuth2Strategy = require("passport-google-oauth20").Strategy;
 const Usermodel = require("./models/UserModel");
-
-
-
 
 
 const clientId =
@@ -53,8 +44,6 @@ app.use("/api/products", productRoute);
 app.use("/api/favorites", favoriteRoutes);
 
 const PORT = 5000;
-
-
 
 
 app.use(
@@ -125,7 +114,7 @@ app.use(
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      successRedirect: "http://localhost:5173/dashboard",
+      successRedirect: "http://localhost:5173/products",
       failureRedirect: "http://localhost:5173/login",
     })
   );
