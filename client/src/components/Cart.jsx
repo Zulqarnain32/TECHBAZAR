@@ -7,6 +7,8 @@ const Cart = () => {
   const [cart, setCart] = useState(null); // Initially null to differentiate between loading and empty
   const { user } = useContext(AuthContext);
   const userId = user?.id || user?._id; // Ensure it works for both normal & Google users
+  const [ totalItem,setTotalItem ] = useState(0)
+  const [ totalPrice,setTotalPrice ] = useState(0)
 
   useEffect(() => {
     if (!userId) {
@@ -24,12 +26,31 @@ const Cart = () => {
       .catch((err) => console.log("Error fetching cart:", err));
   }, [userId]);
 
+  const getTotalItem = () => {
+    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+    setTotalItem(total);
+    localStorage.setItem("totalItem", total);
+    window.dispatchEvent(new CustomEvent("cartUpdated", { detail: total }));
+  };
+
+
+  const getTotalPrice = () => {
+    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotalPrice(total);
+  };
+  
+
   useEffect(() => {
     if (cart !== null) {
       console.log("Updated cart:", cart);
       console.log("Cart length:", cart.length);
+      getTotalItem()
+      getTotalPrice()
     }
   }, [cart]);
+
+
+ 
 
   // ✅ Function to remove product from cart
   const removeFromCart = (productId) => {
@@ -76,7 +97,7 @@ const Cart = () => {
   return (
     <div className="container mx-auto p-6">
       {/* <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1> */}
-      <div className="flex  space-x-1 mt-6">
+      <div className="flex  space-x-5 mt-6">
         <div className="w-[70%] ">
           <div className="h-[160px] p-6 bg-gray-200">
             <input
@@ -144,6 +165,16 @@ const Cart = () => {
                   </div>
                 </div>
               ))}
+              <div className="flex justify-between w-[200px] mx-auto">
+                 <h1 className="font-bold">Total Item</h1>
+                 <h1 className="font-bold">{totalItem}</h1>
+              </div>
+              <div className="flex justify-between w-[200px] mx-auto">
+                 <h1 className="font-bold">Total Price</h1>
+                 <h1 className="font-bold">{totalPrice}</h1>
+              </div>
+             
+              
             </div>
           ) : (
             <p className="text-center text-gray-500 text-lg">
@@ -151,6 +182,7 @@ const Cart = () => {
             </p>
           )}
         </div>
+
       </div>
     </div>
   );

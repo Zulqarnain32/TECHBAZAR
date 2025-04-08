@@ -11,26 +11,42 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [cookies, setCookies] = useCookies(["access_token"]);
   const { user } = useContext(AuthContext);
-  console.log("user", user);
+  const [totalItem, setTotalItem] = useState(
+    parseInt(localStorage.getItem("totalItem")) || 0
+  );
+  // console.log("userlogin ",user)
+useEffect(() => {
+  const updateCart = (e) => {
+    setTotalItem(e.detail); // e.detail is the new totalItem
+  };
+
+  window.addEventListener("cartUpdated", updateCart);
+
+  return () => {
+    window.removeEventListener("cartUpdated", updateCart);
+  };
+}, []);
+
+  // console.log("user", user);
 
   const [userData, setUserData] = useState();
   const getUserData = () => {
     axios
       .get("http://localhost:5000/login/success", { withCredentials: true })
       .then((result) => {
-        console.log(result.data.message.displayName);
-        console.log(result.data.message.email);
-        console.log(result.data.message.googleId);
+        // console.log(result.data.message.displayName);
+        // console.log(result.data.message.email);
+        // console.log(result.data.message.googleId);
         setUserData(result.data.message);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("hello", err));
   };
 
   useEffect(() => {
     getUserData();
   }, []);
 
-  console.log("User DAta ", userData);
+  // console.log("User DAta ", userData);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -133,12 +149,12 @@ const Navbar = () => {
           <div className="flex">
             <FaShoppingCart className="text-3xl" />
             <span className="mt-[-5px] ml-0.5 bg-red-500 text-white text-[12px]  rounded-full h-[20px] w-5 flex items-center justify-center font-semibold">
-              12
+              {totalItem}
             </span>
           </div>
         </Link>
 
-        {user?.username || userData?.email ? (
+        {user?.username || user?.email ? (
           <button
             onClick={handleLogout}
             className="text-white block py-1.5 xs:m-3  px-3  md:border-0 cursor-pointer bg-red-500 "
