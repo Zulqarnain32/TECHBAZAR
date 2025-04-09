@@ -19,7 +19,7 @@ router.post("/email", (req, res) => {
   // Email details
   var mailOptions = {
     from: "zulqarnainc67@gmail.com",
-    to: "iamzulqarnainchohan@gmail.com", // Send email to the user's provided email
+    to: email, // Send email to the user's provided email
     subject: "Your Order Information",
     text: `we have recived your order`,
   };

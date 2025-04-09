@@ -97,8 +97,8 @@ const Cart = () => {
   return (
     <div className="container mx-auto p-6">
       {/* <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1> */}
-      <div className="flex  space-x-5 mt-6">
-        <div className="w-[70%] ">
+      <div className="flex  space-x-5 mt-6 xs:flex-wrap">
+        <div className="w-[70%] xs:w-[100%]">
           <div className="h-[160px] p-6 bg-gray-200">
             <input
               className="py-1 px-2 w-[250px] text-sm h-10  border-2 focus:border-black focus:ring-7 outline-none"
@@ -122,7 +122,7 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="w-[30%]">
+        <div className="w-[30%] xs:w-[100%] xs:mt-5">
           {cart === null ? (
             <p className="text-center text-gray-500 text-lg">Loading...</p>
           ) : cart.length > 0 ? (

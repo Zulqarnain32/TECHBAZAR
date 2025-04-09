@@ -134,10 +134,10 @@ useEffect(() => {
 
         {user && (
           <Link
-            className="text-red-500 md:text-red-500 block py-4 px-4 border-b md:border-0"
+            className="text-red-500  md:text-red-500 block py-4 px-4 border-b md:border-0 xs:text-sm"
             onClick={closeNav}
           >
-            {user.username || user.displayName}
+            {user.username || user.displayName.split(" ")[0]}
           </Link>
         )}
 
