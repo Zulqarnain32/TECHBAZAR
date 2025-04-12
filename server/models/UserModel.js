@@ -14,6 +14,14 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  address:{
+    type:String,
+    default:""
+  },
+  whatsApp:{
+    type:Number,
+    default:""
+  },
   role: { type: String, default: "user", enum: ["admin", "manager", "user"] },
   cart: {
     type: [

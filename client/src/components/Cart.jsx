@@ -9,6 +9,15 @@ const Cart = () => {
   const userId = user?.id || user?._id; // Ensure it works for both normal & Google users
   const [ totalItem,setTotalItem ] = useState(0)
   const [ totalPrice,setTotalPrice ] = useState(0)
+  const [ optVerified,setOtpVerified ] = useState(false)
+  const [ userOtpVerify,setUserOtpVerify ] = useState(false)
+
+  const [ whatsApp,setWhatsApp ] = useState("")
+  const [ address,setAddress ] = useState("")
+ 
+  
+  console.log("cart Page ", user.username || user.displayName )
+
 
   useEffect(() => {
     if (!userId) {
@@ -94,32 +103,87 @@ const Cart = () => {
       .catch((err) => console.log("Error decreasing quantity:", err));
   };
 
+  // const checkOtp = () => {
+  //   if(optVerified.length > 4){
+  //     setUserOtpVerify(true)
+  //     setOtpVerified("")
+  //   } else {
+  //     setUserOtpVerify(false)
+  //   }
+  // }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("form data")
+  }
+
+
+  axios.post("http://localhost:5000/api/cart/data", {whatsApp,address,userId})
+  .then(res => {
+    console.log(res)
+    console.log("fornted ok")
+  }).catch(err => {
+    console.log("error while sending data ", err)
+  })
+
+
   return (
     <div className="container mx-auto p-6">
-      {/* <h1 className="text-3xl font-bold text-center mb-6">Shopping Cart</h1> */}
       <div className="flex  space-x-5 mt-6 xs:flex-wrap">
         <div className="w-[70%] xs:w-[100%]">
-          <div className="h-[160px] p-6 bg-gray-200">
+        <form onSubmit={handleSubmit}>
+          <div className=" p-6 bg-gray-200">
             <input
               className="py-1 px-2 w-[250px] text-sm h-10  border-2 focus:border-black focus:ring-7 outline-none"
               placeholder="Whatsapp Number"
+              type="number"
+              onChange={(e) => setWhatsApp(e.target.value)}
+              // value={optVerified}
+              // onChange={(e) => setOtpVerified(e.target.value)}
             />
 
             <div className="mt-6">
-              <button className="bg-blue-500 text-white cursor-pointer py-2 px-2">
+              {/* <button
+               onClick={checkOtp}
+
+               className="bg-blue-500 text-white cursor-pointer py-2 px-2">
                 Request OPT
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="bg-gray-200 mt-6 p-6">
             <p>Contact Information</p>
+            {/* {userOtpVerify &&  */}
+              <div>
+                
+                 <input 
+                  className="mt-3 h-10 px-3 text-gray-400 w-[300px]"
+                 type="text" value={user.username || user.displayName} />
+                <br />
+                 <input
+                  className="mt-3 h-10 px-3 text-gray-400 w-[300px]"
+                 type="text" value={user.email} />
+              </div>
+            {/* } */}
           </div>
           <div className="bg-gray-200 mt-6 p-6">
-            <p>Delivery Information</p>
+            <p>Address Information</p>
+            {/* {userOtpVerify &&  */}
+             <div>
+               <input 
+               onChange={(e) => setAddress(e.target.value)}
+               placeholder="Enter your address"
+               type="text" className=" mt-3 h-10 px-3  w-full" />
+             </div>
+             <button
+             type="submit"
+             className="bg-blue-400 mt-4 text-white  cursor-pointer w-[100px] h-8 mx-auto">Save</button>
+
+            {/* } */}
+
           </div>
-          <div className="bg-gray-200 mt-6 p-6">
-            <p>Payment Information</p>
-          </div>
+          
+       </form>
         </div>
 
         <div className="w-[30%] xs:w-[100%] xs:mt-5">
@@ -173,6 +237,7 @@ const Cart = () => {
                  <h1 className="font-bold">Total Price</h1>
                  <h1 className="font-bold">{totalPrice}</h1>
               </div>
+              <button className="bg-red-400 text-white  cursor-pointer w-[200px] h-10 mx-auto">Check Out</button>
              
               
             </div>

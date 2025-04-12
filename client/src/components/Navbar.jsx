@@ -91,7 +91,7 @@ useEffect(() => {
         <GiHamburgerMenu className="text-3xl text-white" />
       </div>
       <div
-        className={`xs:bg-blue-500 xs:text-white absolute md:static top-[70px] left-0 w-[140px] md:w-auto h-screen md:h-auto transition-all duration-300 ease-in overflow-hidden z-50 md:flex md:items-center md:space-x-8 md:text-[18px] font-bold uppercase tracking-wide ${
+        className={`xs:bg-blue-500 xs:text-white absolute md:static top-[70px] left-0 w-[140px] md:w-auto h-screen md:h-auto transition-all duration-300 ease-in overflow-hidden z-50 md:flex md:items-center md:space-x-4 md:text-[18px] font-bold uppercase tracking-wide ${
           showNavbar ? "left-0" : "left-[-140px]"
         }`}
       >
