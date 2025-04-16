@@ -115,16 +115,26 @@ const Cart = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form data")
+    axios.post("http://localhost:5000/api/cart/data", {whatsApp,address,userId})
+    .then(res => {
+      console.log(res)
+      console.log("fornted ok")
+    }).catch(err => {
+      console.log("error while sending data ", err)
+    })
   }
 
+  const confirmOrder = () => {
+    console.log("order confirmed");
+    alert("Thanks for ordering!");
+    setCart(null); // ✅ This clears the cart from frontend state
+    setTotalItem(0); // Optionally reset total items and price too
+    setTotalPrice(0);
+    localStorage.setItem("totalItem", 0);
+    window.dispatchEvent(new CustomEvent("cartUpdated", { detail: 0 }));
+  };
+  
 
-  axios.post("http://localhost:5000/api/cart/data", {whatsApp,address,userId})
-  .then(res => {
-    console.log(res)
-    console.log("fornted ok")
-  }).catch(err => {
-    console.log("error while sending data ", err)
-  })
 
 
   return (
@@ -188,7 +198,7 @@ const Cart = () => {
 
         <div className="w-[30%] xs:w-[100%] xs:mt-5">
           {cart === null ? (
-            <p className="text-center text-gray-500 text-lg">Loading...</p>
+            <p className="text-center text-gray-500 text-lg">cart is empty...</p>
           ) : cart.length > 0 ? (
             <div className="grid grid-cols-1 gap-6">
               {cart.map((item) => (
@@ -237,7 +247,9 @@ const Cart = () => {
                  <h1 className="font-bold">Total Price</h1>
                  <h1 className="font-bold">{totalPrice}</h1>
               </div>
-              <button className="bg-red-400 text-white  cursor-pointer w-[200px] h-10 mx-auto">Check Out</button>
+              <button
+                onClick={confirmOrder}
+                className="bg-red-400 text-white  cursor-pointer w-[200px] h-10 mx-auto">Check Out</button>
              
               
             </div>

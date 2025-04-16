@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   whatsApp:{
     type:Number,
-    default:""
+    default:null
   },
   role: { type: String, default: "user", enum: ["admin", "manager", "user"] },
   cart: {
@@ -45,6 +45,20 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
   favorites: {
+    type: [
+      {
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        name: { type: String },
+        price: { type: Number },
+        rating: { type: String },
+        category: { type: String },
+        image: { type: String },
+        stock: { type: Number },
+      },
+    ],
+    default: [],
+  },
+  userOrders: {
     type: [
       {
         productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },

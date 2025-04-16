@@ -51,7 +51,7 @@ const Products = () => {
                     </div>
                     <div className='mt-3'>
                       <button
-                        className='bg-blue-500 hover:bg-blue-700 text-white w-full py-1 rounded text-sm'
+                        className='bg-blue-500 hover:bg-blue-700 text-white w-full py-2 rounded text-sm'
                         onClick={() => navigate(`/products/${product._id}`)}
                       >
                         Detail
