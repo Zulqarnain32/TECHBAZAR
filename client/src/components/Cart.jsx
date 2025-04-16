@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ImBin2 } from "react-icons/im";
 import { AuthContext } from "../global/AuthContext";
+import Swal from 'sweetalert2';
 
 const Cart = () => {
   const [cart, setCart] = useState(null); // Initially null to differentiate between loading and empty
@@ -14,7 +15,6 @@ const Cart = () => {
 
   const [ whatsApp,setWhatsApp ] = useState("")
   const [ address,setAddress ] = useState("")
- 
   
   console.log("cart Page ", user.username || user.displayName )
 
@@ -124,17 +124,16 @@ const Cart = () => {
     })
   }
 
-  const confirmOrder = () => {
-    console.log("order confirmed");
-    alert("Thanks for ordering!");
-    setCart(null); // ✅ This clears the cart from frontend state
-    setTotalItem(0); // Optionally reset total items and price too
-    setTotalPrice(0);
-    localStorage.setItem("totalItem", 0);
-    window.dispatchEvent(new CustomEvent("cartUpdated", { detail: 0 }));
-  };
+  const showAlert = () => {
+    Swal.fire({
+      title: 'Order Placed Successfully!',
+      text: 'The order has been placed successfully.',
+      icon: 'success',
+      confirmButtonText: 'Continue Shopping',
+      timer:3000
+    });
   
-
+  };
 
 
   return (
@@ -248,7 +247,8 @@ const Cart = () => {
                  <h1 className="font-bold">{totalPrice}</h1>
               </div>
               <button
-                onClick={confirmOrder}
+                // onClick={confirmOrder}
+                onClick={showAlert}
                 className="bg-red-400 text-white  cursor-pointer w-[200px] h-10 mx-auto">Check Out</button>
              
               

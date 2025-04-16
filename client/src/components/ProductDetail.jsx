@@ -4,7 +4,7 @@ import { IoIosStar } from "react-icons/io";
 import axios from "axios";
 import { AuthContext } from "../global/AuthContext"
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -38,12 +38,12 @@ const ProductDetail = () => {
         // console.log(result.data.cart);
         if (result.data.message === "Product added") {
           console.log("product added");
-          alert("Product has added to your cart")
+          toast.success("Product has been added to your cart!");
           navigate("/cart")
         }
         if (result.data.message === "product already exist") {
           console.log("product already exist");
-          alert("Product already exists in your cart")
+          toast.info("Product already exists in your cart")
           navigate("/cart")
         }
       })
@@ -63,12 +63,12 @@ const ProductDetail = () => {
         console.log(result.data.favorites);
         if (result.data.message === "Product added") {
           console.log("product added");
-          alert("product has added to your favorite")
+          toast.success("product has added to your favorite")
           navigate("/favorite")
         }
         if (result.data.message === "product already exist") {
           console.log("product already exist");
-          alert("product has already exists to your favorite")
+          toast.info("product has already exists to your favorite")
           navigate("/favorite")
         }
       })

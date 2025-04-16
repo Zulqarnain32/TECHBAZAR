@@ -14,6 +14,9 @@ import ResetPassword from './components/ResetPassword'
 import { AuthContext } from './global/AuthContext'
 import Favorite from './components/Favorite'
 import ProductDetail from './components/ProductDetail'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import("./App.css")
 const App = () => {
   const {user} = useContext(AuthContext)
@@ -24,6 +27,10 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
+      <ToastContainer 
+        position="top-center" 
+        autoClose={2000}
+      />
       <Navbar/>
       <Bot/>
         <Routes>

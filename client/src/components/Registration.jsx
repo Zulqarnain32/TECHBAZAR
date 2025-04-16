@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Registration = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -14,22 +15,22 @@ const Registration = () => {
 
     axios.post('http://localhost:5000/api/auth/register', { username, email, password })
       .then(result => {
-        console.log(result.data);
+        const msg = result?.data?.message;
 
-        if (result?.data?.message === "please fill all the fields") {
-          setError("Please fill all the fields");
-        } else if (result?.data?.message === "email already exist") {
-          setError("Email already exists");
+        if (msg === "please fill all the fields") {
+          toast.warning("Please fill all the fields");
+        } else if (msg === "email already exist") {
+          toast.error("Email already exists");
         } else {
+          toast.success("Registered Successfully!");
           navigate("/login");
         }
 
       }).catch(err => {
-        setError(err.response?.data?.message || "Something went wrong");
+        const message = err.response?.data?.message || "Something went wrong";
+        toast.error(message);
       });
-      
   }
-
 
   return (
     <div className="flex justify-center items-center h-[calc(100vh-70px)] bg-gray-100">
@@ -62,9 +63,6 @@ const Registration = () => {
           >
             Register
           </button>
-         
-
-          {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
 
           <hr className="my-4 border-gray-300" />
 
@@ -74,8 +72,6 @@ const Registration = () => {
           >
             Already have an Account
           </Link>
-         
-          
         </form>
       </div>
     </div>
@@ -83,4 +79,3 @@ const Registration = () => {
 };
 
 export default Registration;
-``
