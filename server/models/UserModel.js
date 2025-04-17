@@ -61,17 +61,30 @@ const userSchema = new mongoose.Schema({
   userOrders: {
     type: [
       {
-        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-        name: { type: String },
-        price: { type: Number },
-        rating: { type: String },
-        category: { type: String },
-        image: { type: String },
-        stock: { type: Number },
-      },
+        cart: [
+          {
+            productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+            name: { type: String },
+            price: { type: Number },
+            rating: { type: String },
+            category: { type: String },
+            image: { type: String },
+            stock: { type: Number },
+            quantity: { type: Number }
+          }
+        ],
+        totalPrice: { type: Number },
+        whatsApp: { type: String },
+        address: { type: String },
+        orderDate: {
+          type: Date,
+          default: Date.now
+        }
+      }
     ],
-    default: [],
-  },
+    default: []
+  }
+  
 });
 
 const UserModel = mongoose.model("UserModel", userSchema);

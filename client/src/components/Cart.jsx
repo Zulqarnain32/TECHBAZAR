@@ -6,13 +6,13 @@ import Swal from 'sweetalert2';
 
 const Cart = () => {
   const [cart, setCart] = useState(null); // Initially null to differentiate between loading and empty
-  const { user } = useContext(AuthContext);
-  const userId = user?.id || user?._id; // Ensure it works for both normal & Google users
   const [ totalItem,setTotalItem ] = useState(0)
   const [ totalPrice,setTotalPrice ] = useState(0)
   const [ optVerified,setOtpVerified ] = useState(false)
   const [ userOtpVerify,setUserOtpVerify ] = useState(false)
-
+  
+  const { user } = useContext(AuthContext);
+  const userId = user?.id || user?._id; // Ensure it works for both normal & Google users
   const [ whatsApp,setWhatsApp ] = useState("")
   const [ address,setAddress ] = useState("")
   
@@ -103,14 +103,7 @@ const Cart = () => {
       .catch((err) => console.log("Error decreasing quantity:", err));
   };
 
-  // const checkOtp = () => {
-  //   if(optVerified.length > 4){
-  //     setUserOtpVerify(true)
-  //     setOtpVerified("")
-  //   } else {
-  //     setUserOtpVerify(false)
-  //   }
-  // }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -124,16 +117,43 @@ const Cart = () => {
     })
   }
 
-  const showAlert = () => {
-    Swal.fire({
-      title: 'Order Placed Successfully!',
-      text: 'The order has been placed successfully.',
-      icon: 'success',
-      confirmButtonText: 'Continue Shopping',
-      timer:3000
-    });
+  const confirmOrder = () => {
+    axios.post("http://localhost:5000/api/cart/checkout", {
+      userId,
+      cart,
+      totalPrice,
+      whatsApp,
+      address
+    })
+    .then(res => {
+      console.log("Order response:", res.data);
+      Swal.fire({
+        title: 'Order Placed Successfully!',
+        text: 'The order has been placed successfully.',
+        icon: 'success',
+        confirmButtonText: 'Continue Shopping',
+        timer: 3000
+      });
   
+      // Optionally reset the cart
+      setCart([]);
+      setTotalItem(0);
+      setTotalPrice(0);
+      localStorage.setItem("totalItem", 0);
+      window.dispatchEvent(new CustomEvent("cartUpdated", { detail: 0 }));
+  
+    })
+    .catch(err => {
+      console.log("Error placing order:", err);
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to place order.',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+    });
   };
+  
 
 
   return (
@@ -147,22 +167,14 @@ const Cart = () => {
               placeholder="Whatsapp Number"
               type="number"
               onChange={(e) => setWhatsApp(e.target.value)}
-              // value={optVerified}
-              // onChange={(e) => setOtpVerified(e.target.value)}
             />
 
             <div className="mt-6">
-              {/* <button
-               onClick={checkOtp}
-
-               className="bg-blue-500 text-white cursor-pointer py-2 px-2">
-                Request OPT
-              </button> */}
+             
             </div>
           </div>
           <div className="bg-gray-200 mt-6 p-6">
             <p>Contact Information</p>
-            {/* {userOtpVerify &&  */}
               <div>
                 
                  <input 
@@ -177,7 +189,6 @@ const Cart = () => {
           </div>
           <div className="bg-gray-200 mt-6 p-6">
             <p>Address Information</p>
-            {/* {userOtpVerify &&  */}
              <div>
                <input 
                onChange={(e) => setAddress(e.target.value)}
@@ -187,8 +198,6 @@ const Cart = () => {
              <button
              type="submit"
              className="bg-blue-400 mt-4 text-white  cursor-pointer w-[100px] h-8 mx-auto">Save</button>
-
-            {/* } */}
 
           </div>
           
@@ -247,8 +256,7 @@ const Cart = () => {
                  <h1 className="font-bold">{totalPrice}</h1>
               </div>
               <button
-                // onClick={confirmOrder}
-                onClick={showAlert}
+                onClick={confirmOrder}
                 className="bg-red-400 text-white  cursor-pointer w-[200px] h-10 mx-auto">Check Out</button>
              
               
