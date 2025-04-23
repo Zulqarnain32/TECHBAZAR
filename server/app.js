@@ -22,11 +22,15 @@ require("dotenv").config();
 dbConnect()
 
 app.use(express.json());
-app.use(cors({
-    origin:["http://localhost:5173"],
-    method:['GET','POST','PUT','DELETE'],
-    credentials:true
-}))
+app.use(
+  cors({
+    // origin: ["http://localhost:5173"],
+    origin: ["https://techbazar-tawny.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 
 app.get("/dashboard", async (req, res) => {
     try {
@@ -47,16 +51,8 @@ app.use("/api/admin", adminRoutes);
 const PORT = 5000;
 
 
-app.use(
-    cors({
-      // origin: ["http://localhost:5173"],
-      origin: ["https://techbazar-tawny.vercel.app"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true,
-    })
-  );
+
   
-  app.use(express.json());
   
   // Setup Session
   app.use(
