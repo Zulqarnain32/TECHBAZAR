@@ -18,7 +18,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    axios.post('http://localhost:5000/api/auth/login', { email, password })
+    // axios.post('http://localhost:5000/api/auth/login', { email, password })
+    axios.post('https://techbazar-server.vercel.app/api/auth/login', { email, password })
       .then(result => {
         const message = result?.data?.message
 
@@ -51,7 +52,8 @@ const Login = () => {
   }
 
   const openWithGoogle = () => {
-    window.open("http://localhost:5000/auth/google/callback", "_self")
+    // window.open("http://localhost:5000/auth/google/callback", "_self")
+    window.open("https://techbazar-server.vercel.app/auth/google/callback", "_self")
   }
 
   return (
