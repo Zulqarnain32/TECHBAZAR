@@ -24,8 +24,8 @@ dbConnect()
 app.use(express.json());
 app.use(
   cors({
-    // origin: ["http://localhost:5173"],
-    origin: ["https://techbazar-tawny.vercel.app"],
+    // origin: ["https://techbazar-tawny.vercel.app"],
+    origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

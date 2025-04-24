@@ -1,21 +1,10 @@
-// const mongoose = require("mongoose")
-
-// const dbConnect = () => {
-//     mongoose.connect("mongodb://127.0.0.1:27017/TechBazar")
-//     .then(() => {
-//        console.log("connected successfully");
-//     }).catch(err => console.log(err));  
-// }
-
-// module.exports = dbConnect
-
 const mongoose = require("mongoose");
 const products = require("../data/productData");
 const Product = require("../models/productModel");
 
 const dbConnect = () => {
-    // mongoose.connect("mongodb://127.0.0.1:27017/TechBazar")
-    mongoose.connect("mongodb+srv://zulqarnainc67:8edFlYCAniXGuPQY@cluster0.rh2svnp.mongodb.net/")
+    // mongoose.connect("mongodb+srv://zulqarnainc67:8edFlYCAniXGuPQY@cluster0.rh2svnp.mongodb.net/")
+    mongoose.connect("mongodb://127.0.0.1:27017/TechBazar")
         .then(async () => {
             console.log("Connected successfully to MongoDB");
 
