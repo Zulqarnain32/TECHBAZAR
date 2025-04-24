@@ -6,15 +6,27 @@ import { ImBin2 } from "react-icons/im";
 const Dashboard = () => {
   const [data, setData] = useState([]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/dashboard")
+  //     .then((result) => {
+  //       console.log(result.data);
+  //       setData(result.data);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
   useEffect(() => {
     axios
       .get("http://localhost:5000/dashboard")
       .then((result) => {
-        // console.log(result.data);
-        setData(result.data);
+        const filteredUsers = result.data.filter(
+          (user) => user.cart && user.cart.length > 0
+        );
+        setData(filteredUsers);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+  
 
 
   const sendEmail = (email) => {
