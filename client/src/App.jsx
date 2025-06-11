@@ -20,7 +20,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import("./App.css")
 const App = () => {
   const {user} = useContext(AuthContext)
-  const [cookies,setCookies] = useCookies(["access_token"])
   let isSuperAdmin = user?.role === "superAdmin";
   let isAdmin = user?.role === "admin";
   let isManager = user?.role === "manager"; 
@@ -37,7 +36,7 @@ const App = () => {
            <Route path='/' element = {< Home/>}/>
            <Route path='/login' element = {< Login/>}/>
            <Route path='/registration' element = {< Registration/>}/>
-           {/* <Route path='/products' element = {user ? <Products/>:<Login/>}/> */}
+           <Route path='/products' element = {user ? <Products/>:<Login/>}/>
            {/* <Route path='/products/:id' element = {<ProductDetail/>}/> */}
            {/* <Route path='/cart' element = {user? < Cart/>:<Login/>}/> */}
            {/* <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/> */}
