@@ -100,10 +100,10 @@ const ProductDetail = () => {
       <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)] space-x-5">
         <div className="w-1/2 xs:w-full flex justify-end xs:justify-center">
           <div>
-            <div className="text-center mt-6">
+            <div className="text-center mt-6 flex flex-wrap justify-center">
               <img
                 src={image}
-                className="w-[400px] xs-w-[300px] mx-auto border-2 rounded-3xl"
+                className="w-[300px] xs-w-[300px] mx-auto border-2 rounded-3xl"
               />
               <div className="flex justify-center space-x-5 mt-2">
                 {product.gallary.map((prod, i) => (
