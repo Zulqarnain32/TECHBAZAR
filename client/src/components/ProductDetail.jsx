@@ -103,7 +103,7 @@ const ProductDetail = () => {
             <div>
               <img
                 src={image}
-                className="w-[400px] mx-auto border-2 rounded-3xl"
+                className="w-[400px] xs-w-[300px] mx-auto border-2 rounded-3xl"
               />
               <div className="flex justify-center space-x-5 mt-2">
                 {product.gallary.map((prod, i) => (
@@ -175,9 +175,9 @@ const ProductDetail = () => {
             </div>
 
 
-          <div className="bg-orange-100 h-[80px] w-[400px] xs:w-[300px] mt-5 flex items-center justify-between px-2">
+          <div className="bg-orange-100 h-[80px] w-[400px] xs:w-[330px] mt-5 flex items-center justify-between px-2">
             <div>
-              <input type="checkbox" className="w-6 h-6" />
+              <input type="checkbox" className="w-4 h-4" />
             </div>
             <div className="text-sm">
               Add Gift Wrap <br />
