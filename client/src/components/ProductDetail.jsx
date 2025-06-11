@@ -179,7 +179,7 @@ const ProductDetail = () => {
             <div>
               <input type="checkbox" className="w-4 h-4" />
             </div>
-            <div className="text-sm">
+            <div className="text-sm ml-2">
               Add Gift Wrap <br />
               Cost: Rs 199 <br />
               Make it Memorable - Add Gift Wrapping!
