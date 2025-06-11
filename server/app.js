@@ -27,10 +27,9 @@ const startServer = async () => {
     // Now register routes safely
     app.use("/api/auth", authRoutes);
     app.use("/api/products", productRoute);
-    // app.use("/api/cart", cartRoutes);
-    // app.use("/api/favorites", favoriteRoutes);
-    // app.use("/api/admin", adminRoutes);
-    // app.use("/api/admin", adminRoutes);
+    app.use("/api/cart", cartRoutes);
+    app.use("/api/favorites", favoriteRoutes);
+    app.use("/api/admin", adminRoutes);
 
 
     app.get("/", (req, res) => {
