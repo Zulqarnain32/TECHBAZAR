@@ -1,26 +1,3 @@
-// const mongoose = require("mongoose");
-// const products = require("../data/productData");
-// const Product = require("../models/productModel");
-
-// const dbConnect = () => {
-//     mongoose.connect("mongodb://127.0.0.1:27017/TechBazar")
-//         .then(async () => {
-//             console.log("Connected successfully to MongoDB");
-
-//             const existingProducts = await Product.countDocuments();
-//             if (existingProducts === 0) {
-//                 await Product.insertMany(products);
-//                 console.log("Products added to database!");
-//             } else {
-//                 console.log("Products already exist, skipping insertion.");
-//             }
-//         })
-//         .catch((err) => {
-//             console.error("MongoDB Connection Error:", err);
-//         });
-// };
-
-// module.exports = dbConnect;
 const mongoose = require("mongoose");
 
 let isConnected = false;
@@ -32,7 +9,9 @@ const dbConnect = async () => {
   }
   try {
    
-    const db = await mongoose.connect("mongodb://127.0.0.1:27017/TechBazar");
+    // const db = await mongoose.connect("mongodb://127.0.0.1:27017/TechBazar");
+
+    const db = await mongoose.connect("mongodb+srv://zulqarnainc67:EmLFmkOiMGjfiMvU@cluster0.ldworfw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
 
     isConnected = db.connections[0].readyState === 1;
@@ -44,3 +23,4 @@ const dbConnect = async () => {
 };
 
 module.exports = dbConnect;
+
