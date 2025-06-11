@@ -38,11 +38,11 @@ const App = () => {
            <Route path='/registration' element = {< Registration/>}/>
            <Route path='/products' element = {user ? <Products/>:<Login/>}/>
            <Route path='/products/:id' element = {<ProductDetail/>}/>
-           <Route path='/cart' element = {user? < Cart/>:<Login/>}/>
+           {/* <Route path='/cart' element = {user? < Cart/>:<Login/>}/>
            <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/>
            <Route path='/favorite' element = {<Favorite/>}/>
            <Route path='/forgot-password' element = {< ForgotPassword/>}/>
-           <Route path="/resetPassword/:token" element={<ResetPassword />} />
+           <Route path="/resetPassword/:token" element={<ResetPassword />} /> */}
         </Routes>
       </BrowserRouter>
     </>
