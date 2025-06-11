@@ -17,14 +17,15 @@ const Registration = () => {
     axios.post('https://tech-bazaar-backend.vercel.app/api/auth/register', { username, email, password })
       .then(result => {
         const msg = result?.data?.message;
-
-        if (msg === "please fill all the fields") {
-          toast.warning("Please fill all the fields");
+          if(msg === "user registered successfully"){
+           toast.success(msg)
+           navigate("/login")
+          } else if (msg === "please fill all the fields") {
+          toast.warning(msg);
         } else if (msg === "email already exist") {
-          toast.error("Email already exists");
+          toast.error(msg);
         } else {
-          toast.success("Registered Successfully!");
-          navigate("/login");
+          toast.error("Server Error!");
         }
 
       }).catch(err => {
