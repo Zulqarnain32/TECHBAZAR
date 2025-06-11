@@ -7,7 +7,7 @@ const Home = () => {
       <div className="flex  xs:flex-wrap xs:flex-col-reverse items-center justify-between h-full">
         <div className="xs:w-full w-[50%]">
           <h1 className="text-5xl xs:text-center font-bold leading-[55px]  ">
-            Topss Gadgets, Best Prices Shop Now & Save!
+            Top Gadgets, Best Prices Shop Now & Save!
           </h1>
           <p className="my-4 xs:text-center">
           Upgrade your lifestyle with the latest gadgets! From flagship smartphones to high-performance laptops and top-quality accessories, we bring you the best tech at unbeatable prices. Browse, shop, and experience innovation with seamless shopping and fast delivery
@@ -54,10 +54,3 @@ const Home = () => {
 export default Home;
 
 
-
-// Registration Error: MongooseError: Cannot call `usermodels.findOne()` before initial connection is complete if `bufferCommands = false`. Make sure you `await mongoose.connect()` if you have `bufferCommands = false`.
-//     at NativeCollection.<computed> [as findOne] (/var/task/server/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:237:15)
-//     at model.Query._findOne (/var/task/server/node_modules/mongoose/lib/query.js:2661:45)
-//     at model.Query.exec (/var/task/server/node_modules/mongoose/lib/query.js:4456:80)
-//     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-//     at async register (/var/task/server/controllers/authControllers.js:18:26)
