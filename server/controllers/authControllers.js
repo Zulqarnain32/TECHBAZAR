@@ -81,7 +81,7 @@ const forgotPassword = async (req, res) => {
     // Email details
     var mailOptions = {
       from: "zulqarnainc67@gmail.com",
-      to: "iamzulqarnainchohan@gmail.com", // Send email to the user's provided email
+      to: email, // Send email to the user's provided email
       subject: "Reset Your Password",
       // text: `Click the link to reset your password: http://localhost:5173/resetPassword/${emailToken}`,
       text: `Click the link to reset your password: https://tech-bazaar-frontend.vercel.app/resetPassword/${emailToken}`,
