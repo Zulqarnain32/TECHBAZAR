@@ -3,10 +3,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../global/AuthContext';
+import { FadeLoader } from "react-spinners";
 import axios from 'axios';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
   const userId = user?.id;
 
@@ -16,13 +18,24 @@ const Products = () => {
       .get('https://tech-bazaar-backend.vercel.app/api/products/fetch')
       .then((result) => {
         setProducts(result.data);
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
-      });
+      }).finally(() => {
+        setLoading(false)
+      })
   }, []);
 
   const navigate = useNavigate();
+
+   if (loading) {
+    return (
+      <div className="flex justify-center items-start h-screen">
+        <FadeLoader color='#3B82F6'/>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -42,7 +55,7 @@ const Products = () => {
                       alt={product.name}
                       className='w-full h-40 object-contain mb-3'
                     />
-                    <h1 className='text-sm mb-2'>{product.name}</h1>
+                    <h1 className='text-sm mb-2 truncate'>{product.name}</h1>
                     <div className='flex justify-between items-center text-sm'>
                       <h1 className='font-semibold'>RS {product.price}</h1>
                       <span className='bg-green-200 rounded px-2 py-1 text-sm flex items-center'>
