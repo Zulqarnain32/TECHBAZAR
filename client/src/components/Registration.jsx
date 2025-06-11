@@ -22,14 +22,17 @@ const Registration = () => {
         console.log("register ", result)
         const msg = result?.data?.message;
           if(msg === "user registered successfully"){
+            console.log("success")
            toast.success(msg)
            navigate("/login")
           } else if (msg === "please fill all the fields") {
           toast.warning(msg);
         } else if (msg === "email already exist") {
           toast.error(msg);
+          
         } else {
           toast.error("Server Error!");
+          console.log("failure")
         }
 
       }).catch(err => {

@@ -2,35 +2,39 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const Usermodel = require("../models/UserModel");
-
 const register = async (req, res) => {
   try {
     console.log("req body ", req.body);
     
-    const { username,email, password} = req.body;
-    console.log("user data ", username,email,password);
+    const { username, email, password } = req.body;
+    console.log("user data ", username, email, password);
     
-    if(!username || !email || !password ){
-      return res.json({message:"please fill all the fields"})
-    }
-    const user = await Usermodel.findOne({ email });
-    if(user){
-      return res.json({message:"email already exist"})
+    // Validate input
+    if (!username || !email || !password) {
+      return res.status(400).json({ success: false, message: "Please fill all the fields" });
     }
 
-    
+    // Check if user already exists
+    const existingUser = await Usermodel.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ success: false, message: "Email already exists" });
+    }
+
+    // Hash password and save user
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new Usermodel({ username,email,password:hashPassword });
+    const newUser = new Usermodel({ username, email, password: hashPassword });
     await newUser.save();
+
     console.log("user registered");
-    
-    res.json({ message: `user registered successfully` });
+
+    return res.status(201).json({ success: true, message: "User registered successfully", user: newUser });
+
   } catch (err) {
-    console.log(err);
-    
-    res.json(err);
+    console.error("Registration Error:", err);
+    return res.status(500).json({ success: false, message: "Something went wrong", error: err.message });
   }
 };
+
 
 const login = async (req, res) => {
   console.log("req body ", req.body);
