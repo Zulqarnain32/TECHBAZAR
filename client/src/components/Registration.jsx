@@ -14,11 +14,11 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
 
     // axios.post('http://localhost:5000/api/auth/register', { username, email, password })
     axios.post('https://tech-bazaar-backend.vercel.app/api/auth/register', { username, email, password })
-    setLoading(true)
-      .then(result => {
+    .then(result => {
         console.log("register ", result)
         const msg = result?.data?.message;
           if(msg === "user registered successfully"){
