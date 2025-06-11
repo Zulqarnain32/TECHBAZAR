@@ -100,7 +100,7 @@ const ProductDetail = () => {
       <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)] space-x-5">
         <div className="w-1/2 xs:w-full flex justify-end xs:justify-center">
           <div>
-            <div>
+            <div className="text-center mt-6">
               <img
                 src={image}
                 className="w-[400px] xs-w-[300px] mx-auto border-2 rounded-3xl"
@@ -180,7 +180,6 @@ const ProductDetail = () => {
               <input type="checkbox" className="w-4 h-4" />
             </div>
             <div className="text-sm ml-2">
-              Add Gift Wrap <br />
               Cost: Rs 199 <br />
               Make it Memorable - Add Gift Wrapping!
             </div>
