@@ -19,7 +19,8 @@ const ResetPassword = () => {
     }
 
     axios
-      .post(`http://localhost:5000/api/auth/reset-password/${token}`, { password })
+      // .post(`http://localhost:5000/api/auth/reset-password/${token}`, { password })
+      .post(`https://tech-bazaar-backend.vercel.app/api/auth/reset-password/${token}`, { password })
       .then((result) => {
         setError(result.data.message);
         console.log(result);

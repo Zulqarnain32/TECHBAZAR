@@ -16,7 +16,8 @@ const ProductDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      // .get(`http://localhost:5000/api/products/${id}`)
+      .get(`https://tech-bazaar-backend.vercel.app/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
         setImage(response.data.image);
@@ -30,7 +31,8 @@ const ProductDetail = () => {
   const handleAddToCart = (product) => {
     console.log(product._id)
     axios
-      .post("http://localhost:5000/api/cart/add", {
+      // .post("http://localhost:5000/api/cart/add", {
+      .post("https://tech-bazaar-backend.vercel.app/api/cart/add", {
         userId,
         productId: product._id,
       })
@@ -55,7 +57,8 @@ const ProductDetail = () => {
   const handleAddToFavorite = (product) => {
     console.log("favorite ", product._id)
     axios
-      .post("http://localhost:5000/api/favorites/add", {
+      // .post("http://localhost:5000/api/favorites/add", {
+      .post("https://tech-bazaar-backend.vercel.app/api/favorites/add", {
         userId,
         productId: product._id,
       })

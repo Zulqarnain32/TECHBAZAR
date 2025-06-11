@@ -8,7 +8,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/dashboard")
+      // .get("http://localhost:5000/dashboard")
+      .get("https://tech-bazaar-backend.vercel.app/dashboard")
       .then((result) => {
         console.log(result.data);
         const filteredUsers = result.data.filter(
@@ -22,7 +23,8 @@ const Dashboard = () => {
   const sendEmail = (email) => {
     console.log("email ", email);
     axios
-      .post("http://localhost:5000/api/admin/email", { email })
+      // .post("http://localhost:5000/api/admin/email", { email })
+      .post("https://tech-bazaar-backend.vercel.app/api/admin/email", { email })
       .then((res) => {
         console.log("email sent", res);
       })

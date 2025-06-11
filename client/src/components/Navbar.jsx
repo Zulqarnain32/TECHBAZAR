@@ -9,44 +9,22 @@ import { AuthContext } from "../global/AuthContext";
 import axios from "axios";
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
-  const [cookies, setCookies] = useCookies(["access_token"]);
   const { user } = useContext(AuthContext);
   const [totalItem, setTotalItem] = useState(
     parseInt(localStorage.getItem("totalItem")) || 0
   );
   // console.log("userlogin ",user)
-useEffect(() => {
-  const updateCart = (e) => {
-    setTotalItem(e.detail); // e.detail is the new totalItem
-  };
-
-  window.addEventListener("cartUpdated", updateCart);
-
-  return () => {
-    window.removeEventListener("cartUpdated", updateCart);
-  };
-}, []);
-
-  // console.log("user", user);
-
-  const [userData, setUserData] = useState();
-  const getUserData = () => {
-    axios
-      .get("http://localhost:5000/login/success", { withCredentials: true })
-      .then((result) => {
-        // console.log(result.data.message.displayName);
-        // console.log(result.data.message.email);
-        // console.log(result.data.message.googleId);
-        setUserData(result.data.message);
-      })
-      .catch((err) => console.log("hello", err));
-  };
-
   useEffect(() => {
-    getUserData();
-  }, []);
+    const updateCart = (e) => {
+      setTotalItem(e.detail); // e.detail is the new totalItem
+    };
 
-  // console.log("User DAta ", userData);
+    window.addEventListener("cartUpdated", updateCart);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCart);
+    };
+  }, []);
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -55,18 +33,12 @@ useEffect(() => {
   const closeNav = () => {
     setShowNavbar(false);
   };
+
   let isAdmin = user?.role === "admin";
+  
   const handleLogout = () => {
-    setCookies("access_token", ""); // Remove JWT token
     window.localStorage.removeItem("user"); // Remove local user
     window.location.reload();
-    axios
-      .get("http://localhost:5000/logout", { withCredentials: true }) // Clear Google session
-      .then(() => {
-        setUser(null);
-        window.location.reload();
-      })
-      .catch((err) => console.log("Logout error:", err));
   };
 
   useEffect(() => {

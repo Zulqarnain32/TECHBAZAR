@@ -13,8 +13,8 @@ const Registration = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // axios.post('https://techbazar-server.vercel.app/api/auth/register',{ withCredentials: true },{ username, email, password })
-    axios.post('http://localhost:5000/api/auth/register', { username, email, password })
+    // axios.post('http://localhost:5000/api/auth/register', { username, email, password })
+    axios.post('https://tech-bazaar-backend.vercel.app/api/auth/register', { username, email, password })
       .then(result => {
         const msg = result?.data?.message;
 

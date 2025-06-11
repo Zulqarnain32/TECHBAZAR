@@ -12,7 +12,8 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/api/products/fetch')
+      // .get('http://localhost:5000/api/products/fetch')
+      .get('https://tech-bazaar-backend.vercel.app/api/products/fetch')
       .then((result) => {
         setProducts(result.data);
       })

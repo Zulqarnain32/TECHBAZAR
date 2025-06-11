@@ -25,7 +25,8 @@ const Cart = () => {
     }
 
     axios
-      .get(`http://localhost:5000/api/cart/usercart/${userId}`, {
+      // .get(`http://localhost:5000/api/cart/usercart/${userId}`, {
+      .get(`https://tech-bazaar-backend.vercel.app/api/cart/usercart/${userId}`, {
         withCredentials: true,
       })
       .then((result) => {
@@ -64,7 +65,8 @@ const Cart = () => {
   // ✅ Function to remove product from cart
   const removeFromCart = (productId) => {
     axios
-      .delete("http://localhost:5000/api/cart/remove", {
+      // .delete("http://localhost:5000/api/cart/remove", {
+      .delete("https://tech-bazaar-backend.vercel.app/api/cart/remove", {
         data: { userId, productId },
         withCredentials: true, // Ensure cookies are sent with the request
       })
@@ -78,7 +80,8 @@ const Cart = () => {
   const incrQuantity = (productId) => {
     axios
       .put(
-        "http://localhost:5000/api/cart/increase",
+        // "http://localhost:5000/api/cart/increase",
+        "https://tech-bazaar-backend.vercel.app/api/cart/increase",
         { userId, productId },
         { withCredentials: true }
       )
@@ -92,7 +95,8 @@ const Cart = () => {
   const decrQuantity = (productId) => {
     axios
       .put(
-        "http://localhost:5000/api/cart/decrease",
+        // "http://localhost:5000/api/cart/decrease",
+        "https://tech-bazaar-backend.vercel.app/api/cart/decrease",
         { userId, productId },
         { withCredentials: true }
       )
@@ -108,7 +112,8 @@ const Cart = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("form data")
-    axios.post("http://localhost:5000/api/cart/data", {whatsApp,address,userId})
+    // axios.post("http://localhost:5000/api/cart/data", {whatsApp,address,userId})
+    axios.post("https://tech-bazaar-backend.vercel.app/api/cart/data", {whatsApp,address,userId})
     .then(res => {
       console.log(res)
       console.log("fornted ok")
@@ -118,7 +123,8 @@ const Cart = () => {
   }
 
   const confirmOrder = () => {
-    axios.post("http://localhost:5000/api/cart/checkout", {
+    // axios.post("http://localhost:5000/api/cart/checkout", {
+    axios.post("https://tech-bazaar-backend.vercel.app/api/cart/checkout", {
       userId,
       cart,
       totalPrice,

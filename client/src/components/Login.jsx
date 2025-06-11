@@ -18,7 +18,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    axios.post('http://localhost:5000/api/auth/login', { email, password })
+    // axios.post('http://localhost:5000/api/auth/login', { email, password })
+    axios.post('https://tech-bazaar-backend.vercel.app/api/auth/login', { email, password })
       .then(result => {
         const message = result?.data?.message
 

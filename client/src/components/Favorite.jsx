@@ -11,7 +11,8 @@ const Favorite = () => {
     if (!userId) return;
 
     axios
-      .get(`http://localhost:5000/api/favorites/userfavorite/${userId}`)
+      // .get(`http://localhost:5000/api/favorites/userfavorite/${userId}`)
+      .get(`https://tech-bazaar-backend.vercel.app/api/favorites/userfavorite/${userId}`)
       .then((result) => {
         console.log("Fetched favorites:", result.data.favorites);
         setFavorites(result.data.favorites);
@@ -29,7 +30,8 @@ const Favorite = () => {
   // ✅ Function to remove product from favorites
   const removeFromFavorites = (productId) => {
     axios
-      .delete("http://localhost:5000/api/favorites/remove", {
+      // .delete("http://localhost:5000/api/favorites/remove", {
+      .delete("https://tech-bazaar-backend.vercel.app/api/favorites/remove", {
         data: { userId, productId },
       })
       .then((result) => {
