@@ -1,11 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+const dbConnect = require("./dbConfig/dbConnect")
+const authRoutes = require("./routes/authRoutes")
+// const userRoutes = require("./routes/userRoutes")
+const cartRoutes = require("./routes/cartRoutes")
+const productRoute = require("./routes/productRoute")
+const favoriteRoutes = require("./routes/favoriteRoutes")
+const adminRoutes = require("./routes/adminRoutes")
+const adminRoutes = require("./routes/adminRoutes")
 // require("dotenv").config();
 
-const dbConnect = require("./dbConfig/dbConnect");
 
 const authRoutes = require("./routes/authRoutes");
-const productRoutes = require("./routes/productRoute");
 
 const app = express();
 
@@ -26,11 +32,28 @@ const startServer = async () => {
 
     // Now register routes safely
     app.use("/api/auth", authRoutes);
-    app.use("/api/products", productRoutes);
+    app.use("/api/products", productRoute);
+    app.use("/api/cart", cartRoutes);
+    app.use("/api/favorites", favoriteRoutes);
+    app.use("/api/admin", adminRoutes);
+    app.use("/api/admin", adminRoutes);
+
 
     app.get("/", (req, res) => {
       res.send("backend is working");
     });
+
+
+
+    app.get("/dashboard", async (req, res) => {
+    try {
+        const users = await Usermodel.find({});
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
