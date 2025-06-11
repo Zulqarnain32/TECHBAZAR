@@ -2,15 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const dbConnect = require("./dbConfig/dbConnect")
 const authRoutes = require("./routes/authRoutes")
-// const userRoutes = require("./routes/userRoutes")
 const cartRoutes = require("./routes/cartRoutes")
 const productRoute = require("./routes/productRoute")
 const favoriteRoutes = require("./routes/favoriteRoutes")
 const adminRoutes = require("./routes/adminRoutes")
-// require("dotenv").config();
-
-
-const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -23,7 +18,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 5000;
+const PORT =  5000;
 
 const startServer = async () => {
   try {
