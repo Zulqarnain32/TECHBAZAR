@@ -18,7 +18,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // axios.post('https://techbazar-server.vercel.app/api/auth/login', { email, password })
     axios.post('http://localhost:5000/api/auth/login', { email, password })
       .then(result => {
         const message = result?.data?.message
@@ -51,10 +50,9 @@ const Login = () => {
       })
   }
 
-  const openWithGoogle = () => {
-    // window.open("https://techbazar-server.vercel.app/auth/google/callback", "_self")
-    window.open("http://localhost:5000/auth/google/callback", "_self")
-  }
+  // const openWithGoogle = () => {
+  //   window.open("http://localhost:5000/auth/google/callback", "_self")
+  // }
 
   return (
     <div className="flex justify-center items-center h-[calc(100vh-70px)] bg-gray-100">
@@ -82,13 +80,13 @@ const Login = () => {
             Log In
           </button>
 
-          <div onClick={openWithGoogle} className='border-2 mt-6 flex items-center py-1 justify-center space-x-3 cursor-pointer rounded-md'>
+          {/* <div onClick={openWithGoogle} className='border-2 mt-6 flex items-center py-1 justify-center space-x-3 cursor-pointer rounded-md'>
             <img
               src="/assets/google.png"
               className='w-[20px]'
             />
             <p>Sign in with Google</p>
-          </div>
+          </div> */}
 
           <Link to="/forgot-password" className="text-blue-600 text-center mt-3 text-sm hover:underline">
             Forgot Password?

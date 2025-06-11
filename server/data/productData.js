@@ -1,3 +1,5 @@
+const dbConnect = require("../dbConfig/dbConnect.js");
+const Product = require("../models/productModel.js")
 const products = [
   {
     id: 0,
@@ -236,4 +238,18 @@ const products = [
  
 ];
 
-module.exports = products;
+const seedProducts = async () => {
+  await dbConnect();
+
+  try {
+    await Product.deleteMany(); // Optional: Clear previous data
+    await Product.insertMany(products);
+    console.log("✅ products inserted successfully");
+    process.exit();
+  } catch (error) {
+    console.error("❌ Error inserting products:", error);
+    process.exit(1);
+  }
+};
+
+seedProducts();
