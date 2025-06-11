@@ -31,7 +31,7 @@ const Products = () => {
 
    if (loading) {
     return (
-      <div className="flex justify-center items-start h-screen">
+      <div className="flex justify-center items-center h-screen">
         <FadeLoader color='#3B82F6'/>
       </div>
     );

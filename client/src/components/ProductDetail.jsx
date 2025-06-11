@@ -5,6 +5,8 @@ import axios from "axios";
 import { AuthContext } from "../global/AuthContext"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FadeLoader } from "react-spinners";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -86,7 +88,11 @@ const ProductDetail = () => {
 
 
   if (!product) {
-    return <h1 className="text-center text-red-500">Loading Product...</h1>;
+     return (
+      <div className="flex justify-center items-center h-screen">
+        <FadeLoader color='#3B82F6'/>
+      </div>
+    );
   }
 
   return (
@@ -169,7 +175,7 @@ const ProductDetail = () => {
             </div>
 
 
-          <div className="bg-orange-100 h-[80px] w-[400px] mt-5 flex items-center justify-between px-2">
+          <div className="bg-orange-100 h-[80px] w-[400px] xs:w-[300px] mt-5 flex items-center justify-between px-2">
             <div>
               <input type="checkbox" className="w-6 h-6" />
             </div>
@@ -185,13 +191,13 @@ const ProductDetail = () => {
           </div>
 
           <button
-            className="bg-orange-500 text-white w-[170px] py-2 text-sm mt-3"
+            className="bg-orange-500 text-white w-[170px] xs:w-[150px] py-2 text-sm mt-3"
             onClick={() => handleAddToCart(product)}
           >
             Add to Cart
           </button>
           <button
-            className="bg-blue-500 text-white w-[170px] py-2 text-sm mt-3 ml-2"
+            className="bg-blue-500 text-white w-[150px] py-2 text-sm mt-3 ml-2"
             onClick={() => handleAddToFavorite(product)}
           >
             Add to Favorite
