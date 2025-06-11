@@ -4,12 +4,13 @@ import axios from "axios"
 import { useCookies } from "react-cookie"
 import { AuthContext } from '../global/AuthContext'
 import { toast } from 'react-toastify'
+import { BarLoader } from "react-spinners";
 import 'react-toastify/dist/ReactToastify.css'
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [cookies, setCookies] = useCookies(["access_token"])
+  const [loading, setLoading] = useState(false);
   const { setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -20,6 +21,7 @@ const Login = () => {
 
     // axios.post('http://localhost:5000/api/auth/login', { email, password })
     axios.post('https://tech-bazaar-backend.vercel.app/api/auth/login', { email, password })
+    setLoading(true)
       .then(result => {
         console.log("login ", result)
         const message = result?.data?.message
@@ -27,9 +29,7 @@ const Login = () => {
         if (message === "sucessfully login") {
           window.localStorage.setItem("id", result.data.id)
           window.localStorage.setItem("user", JSON.stringify(result.data))
-          setCookies("access_token", result.data.id)
           setUser({ username: result.data.username })
-
           toast.success("Login successful!", { autoClose: 2000 })
           navigate('/products')
           setTimeout(() => window.location.reload(), 1000)
@@ -49,6 +49,8 @@ const Login = () => {
       }).catch(err => {
         toast.error("Server error. Try again later.", { autoClose: 2500 })
         console.log(err)
+      }).finally(() => {
+        setLoading(false)
       })
   }
 
@@ -79,7 +81,11 @@ const Login = () => {
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
           >
-            Log In
+             {loading ? (
+    <BarLoader color="white" height={4} width={100} />
+  ) : (
+    "Register"
+  )}
           </button>
 
           {/* <div onClick={openWithGoogle} className='border-2 mt-6 flex items-center py-1 justify-center space-x-3 cursor-pointer rounded-md'>

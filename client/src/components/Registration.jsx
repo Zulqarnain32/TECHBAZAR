@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { BarLoader } from "react-spinners";
 
 const Registration = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -15,6 +17,7 @@ const Registration = () => {
 
     // axios.post('http://localhost:5000/api/auth/register', { username, email, password })
     axios.post('https://tech-bazaar-backend.vercel.app/api/auth/register', { username, email, password })
+    setLoading(true)
       .then(result => {
         console.log("register ", result)
         const msg = result?.data?.message;
@@ -32,7 +35,10 @@ const Registration = () => {
       }).catch(err => {
         const message = err.response?.data?.message || "Something went wrong";
         toast.error(message);
-      });
+        console.log("register error ", err)
+      }).finally(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -64,7 +70,11 @@ const Registration = () => {
             type="submit"
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
           >
-            Register
+             {loading ? (
+    <BarLoader color="white" height={4} width={100} />
+  ) : (
+    "Register"
+  )}
           </button>
 
           <hr className="my-4 border-gray-300" />
