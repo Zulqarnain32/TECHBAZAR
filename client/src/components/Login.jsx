@@ -48,7 +48,7 @@ const Login = () => {
 
       }).catch(err => {
         toast.error("Server error. Try again later.", { autoClose: 2500 })
-        console.log(err)
+        console.log("login error ", err)
       }).finally(() => {
         setLoading(false)
       })
