@@ -79,7 +79,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-200"
+            className="flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 h-10 rounded-md transition duration-200"
           >
              {loading ? (
     <BarLoader color="white" height={4} width={100} />
@@ -115,3 +115,4 @@ const Login = () => {
 }
 
 export default Login
+
