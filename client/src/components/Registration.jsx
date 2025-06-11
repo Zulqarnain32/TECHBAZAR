@@ -21,7 +21,7 @@ const Registration = () => {
     .then(result => {
         console.log("register ", result)
         const msg = result?.data?.message;
-          if(msg === "user registered successfully"){
+          if(msg === "User registered successfully"){
             console.log("success")
            toast.success(msg)
            navigate("/login")
