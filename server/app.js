@@ -29,9 +29,9 @@ app.use(
 
 
 app.use("/api/auth",authRoutes)
+app.use("/api/products", productRoute);
 // app.use("/api/cart", cartRoutes);
 // app.use("/api/users",userRoutes)
-app.use("/api/products", productRoute);
 // app.use("/api/favorites", favoriteRoutes);
 // app.use("/api/admin", adminRoutes);
 
