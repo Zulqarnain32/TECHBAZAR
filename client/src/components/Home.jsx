@@ -52,3 +52,12 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+// Registration Error: MongooseError: Cannot call `usermodels.findOne()` before initial connection is complete if `bufferCommands = false`. Make sure you `await mongoose.connect()` if you have `bufferCommands = false`.
+//     at NativeCollection.<computed> [as findOne] (/var/task/server/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:237:15)
+//     at model.Query._findOne (/var/task/server/node_modules/mongoose/lib/query.js:2661:45)
+//     at model.Query.exec (/var/task/server/node_modules/mongoose/lib/query.js:4456:80)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+//     at async register (/var/task/server/controllers/authControllers.js:18:26)
