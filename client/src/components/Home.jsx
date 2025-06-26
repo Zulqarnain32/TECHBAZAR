@@ -6,10 +6,10 @@ const Home = () => {
     <div className="xs:py-0 xs:px-5 p-20 bg-gradient-to-r from-[#83ccff] to-[#4290fb] xs:h-auto xs:w-full h-[calc(100vh-70px)] ">
       <div className="flex  xs:flex-wrap xs:flex-col-reverse items-center justify-between h-full">
         <div className="xs:w-full w-[50%]">
-          <h1 className="text-5xl xs:text-center font-bold leading-[55px]  ">
+          <h1 className="text-5xl xs:text-center xs:text-3xl font-bold leading-[55px]  ">
             Top Gadgets, Best Prices Shop Now & Save!
           </h1>
-          <p className="my-4 xs:text-center">
+          <p className="my-4 xs:text-justify">
           Upgrade your lifestyle with the latest gadgets! From flagship smartphones to high-performance laptops and top-quality accessories, we bring you the best tech at unbeatable prices. Browse, shop, and experience innovation with seamless shopping and fast delivery
           </p>
 
@@ -43,7 +43,7 @@ const Home = () => {
           <img
             src={image}
             alt="image not found"
-            className="xs:w-[250px] xs:h-[300px] w-[420px] h-[500px] drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
+            className="xs:w-[150px] xs:h-[200px] w-[420px] h-[500px] drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
           />
         </div>
       </div>

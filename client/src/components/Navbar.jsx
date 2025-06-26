@@ -52,7 +52,8 @@ const Navbar = () => {
   return (
     <div className="w-full sticky top-0 h-[70px] flex justify-between items-center px-10 xs:px-5 z-10 bg-gradient-to-r from-[#83ccff] to-[#4290fb] bg-blue-300">
       <div className="flex items-center text-[30px] text-red-500">
-        <h4 className="font-extrabold">
+        
+        <h4 className="font-extrabold xs:text-2xl">
           TECH<span className="text-red-500">BAZAAR</span>
         </h4>
       </div>
@@ -86,6 +87,13 @@ const Navbar = () => {
           onClick={closeNav}
         >
           Products
+        </Link>
+         <Link
+          to="/orders"
+          className="text-white md: block py-4 px-4 border-b md:border-0"
+          onClick={closeNav}
+        >
+          Orders
         </Link>
         <Link
           to="/favorite"

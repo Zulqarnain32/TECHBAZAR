@@ -42,27 +42,25 @@ const Favorite = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-[calc(100vh-70px)]">
-      <h1 className="text-3xl font-bold text-center mb-6">
+    <div className="p-2 bg-gray-100 min-h-[calc(100vh-70px)]">
+      <h1 className="text-2xl font-bold text-center my-6">
         Your Favorite Products
       </h1>
 
       {favorites === null ? (
         <p className="text-center text-gray-500 text-lg">Loading...</p>
       ) : favorites.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 z-0">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-1 z-0">
           {favorites.map((item) => (
             <div key={item.productId} className="bg-white shadow-lg rounded-lg p-5 transition-transform transform z-0">
-              <img src={item.image} className="w-[150px] mx-auto mb-2" alt={item.name} />
-              <h3 className="text-xl font-semibold text-gray-800">{item.name}</h3>
-              <p className="text-gray-600">Category: {item.category}</p>
+              <img src={item.image} className=" w-[120px] mx-auto mb-2" alt={item.name} />
+              <h3 className="text-sm truncate font-semibold text-gray-800">{item.name}</h3>
               <p className="text-gray-700 font-bold">Price: ${item.price}</p>
-              <p className="text-gray-600">Quantity: {item.quantity}</p>
               <p className={`text-sm font-medium ${item.stock > 0 ? "text-green-600" : "text-red-600"}`}>
                 {item.stock > 0 ? `In Stock: ${item.stock}` : "Out of Stock"}
               </p>
               <button
-                className="mt-3 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                className="mt-3 bg-red-500 text-white px-3 py-1 w-full rounded-sm hover:bg-red-600 transition"
                 onClick={() => removeFromFavorites(item.productId)}
               >
                 Remove

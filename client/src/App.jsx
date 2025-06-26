@@ -16,6 +16,7 @@ import Favorite from './components/Favorite'
 import ProductDetail from './components/ProductDetail'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Orders from './components/Orders'
 
 import("./App.css")
 const App = () => {
@@ -36,11 +37,13 @@ const App = () => {
            <Route path='/' element = {< Home/>}/>
            <Route path='/login' element = {< Login/>}/>
            <Route path='/registration' element = {< Registration/>}/>
-           <Route path='/products' element = {user ? <Products/>:<Login/>}/>
+           {/* <Route path='/products' element = {user ? <Products/>:<Login/>}/> */}
+           <Route path='/products' element = {<Products/>}/>
            <Route path='/products/:id' element = {<ProductDetail/>}/>
            <Route path='/cart' element = {user? < Cart/>:<Login/>}/>
            <Route path='/dashboard' element = {isAdmin && <Dashboard/>}/>
            <Route path='/favorite' element = {<Favorite/>}/>
+           <Route path='/orders' element = {<Orders/>}/>
            <Route path='/forgot-password' element = {< ForgotPassword/>}/>
            <Route path="/resetPassword/:token" element={<ResetPassword />} />
         </Routes>

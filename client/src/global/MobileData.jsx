@@ -114,51 +114,53 @@ const MobileData = [
         gallary:["/assets/mobileimages/mobile6.webp","/assets/mobileimages/mobile6sub1.webp","/assets/mobileimages/mobile6sub2.webp","/assets/mobileimages/mobile6sub3.webp"],
         colors:["/assets/mobileimages/mobile6.webp","/assets/mobileimages/mobile6gray.webp","/assets/mobileimages/mobile6gold.webp"]
     },
-    // {
-    //     id:7,
-    //     name:"Oppo A3",
-    //     price:52999,
-    //     rating:4.5,
-    //     reviews:39,
-    //     image:"/assets/mobileimages/mobile7.webp",
-    //     colors:["/assets/mobileimages/mobile7white.webp","/assets/mobileimages/mobile7purple.webp"]
-    // },
-    // {
-    //     id:8,
-    //     name:"Apple iPhone 14",
-    //     price:259999,
-    //     rating:4.5,
-    //     reviews:39,
-    //     image:"/assets/mobileimages/mobile8.webp",
-    //     colors:["/assets/mobileimages/mobile8black.webp","/assets/mobileimages/mobile8purple.webp"]
-    // },
-    // {
-    //     id:9,
-    //     name:"Apple iPhone 16 Pro",
-    //     price:435000,
-    //     rating:4.5,
-    //     reviews:39,
-    //     image:"/assets/mobileimages/mobile9.webp",
-    //     colors:["/assets/mobileimages/mobile9titanium.webp","/assets/mobileimages/mobile9white.webp"]
-    // },
-    // {
-    //     id:10,
-    //     name:"Samsung Galaxy S24",
-    //     price:252000,
-    //     rating:4.5,
-    //     reviews:39,
-    //     image:"/assets/mobileimages/mobile10.webp",
-    //     colors:["/assets/mobileimages/mobile10black.webp","/assets/mobileimages/mobile10gray.webp"]
-    // },
-    // {
-    //     id:11,
-    //     name:"Samsung Galaxy A25",
-    //     price:68500,
-    //     rating:4.5,
-    //     reviews:39,
-    //     image:"/assets/mobileimages/mobile11.webp",
-    //     colors:["/assets/mobileimages/mobile11black.webp","/assets/mobileimages/mobile11yellow.webp"]
-    // },
+    {
+        id:7,
+        name:"Oppo A3",
+        price:52999,
+        rating:4.5,
+        reviews:39,
+        gallary:[],
+        stock:10,
+        image:"/assets/mobileimages/mobile7.webp",
+        colors:["/assets/mobileimages/mobile7white.webp","/assets/mobileimages/mobile7purple.webp"]
+    },
+    {
+        id:8,
+        name:"Apple iPhone 14",
+        price:259999,
+        rating:4.5,
+        reviews:39,
+        image:"/assets/mobileimages/mobile8.webp",
+        colors:["/assets/mobileimages/mobile8black.webp","/assets/mobileimages/mobile8purple.webp"]
+    },
+    {
+        id:9,
+        name:"Apple iPhone 16 Pro",
+        price:435000,
+        rating:4.5,
+        reviews:39,
+        image:"/assets/mobileimages/mobile9.webp",
+        colors:["/assets/mobileimages/mobile9titanium.webp","/assets/mobileimages/mobile9white.webp"]
+    },
+    {
+        id:10,
+        name:"Samsung Galaxy S24",
+        price:252000,
+        rating:4.5,
+        reviews:39,
+        image:"/assets/mobileimages/mobile10.webp",
+        colors:["/assets/mobileimages/mobile10black.webp","/assets/mobileimages/mobile10gray.webp"]
+    },
+    {
+        id:11,
+        name:"Samsung Galaxy A25",
+        price:68500,
+        rating:4.5,
+        reviews:39,
+        image:"/assets/mobileimages/mobile11.webp",
+        colors:["/assets/mobileimages/mobile11black.webp","/assets/mobileimages/mobile11yellow.webp"]
+    },
    
     
     

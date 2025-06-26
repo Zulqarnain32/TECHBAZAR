@@ -1,9 +1,8 @@
-import React, { useEffect, useState,useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 import axios from "axios";
-import { AuthContext } from "../global/AuthContext"
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../global/AuthContext";
 import { toast } from "react-toastify";
 import { FadeLoader } from "react-spinners";
 
@@ -13,8 +12,7 @@ const ProductDetail = () => {
   const [image, setImage] = useState("");
   const { user } = useContext(AuthContext);
   const userId = user?.id || user?._id;
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -23,7 +21,7 @@ const ProductDetail = () => {
       .then((response) => {
         setProduct(response.data);
         setImage(response.data.image);
-        // console.log("detail page ", response.data);
+        console.log("image ",response.data.image)
       })
       .catch((error) => {
         console.error("Error fetching product:", error);
@@ -31,7 +29,6 @@ const ProductDetail = () => {
   }, [id]);
 
   const handleAddToCart = (product) => {
-    console.log(product._id)
     axios
       // .post("http://localhost:5000/api/cart/add", {
       .post("https://tech-bazaar-backend.vercel.app/api/cart/add", {
@@ -39,16 +36,13 @@ const ProductDetail = () => {
         productId: product._id,
       })
       .then((result) => {
-        // console.log(result.data.cart);
         if (result.data.message === "Product added") {
-          console.log("product added");
           toast.success("Product has been added to your cart!");
-          navigate("/cart")
+          navigate("/cart");
         }
         if (result.data.message === "product already exist") {
-          console.log("product already exist");
-          toast.info("Product already exists in your cart")
-          navigate("/cart")
+          toast.info("Product already exists in your cart");
+          navigate("/cart");
         }
       })
       .catch((err) => {
@@ -57,7 +51,6 @@ const ProductDetail = () => {
   };
 
   const handleAddToFavorite = (product) => {
-    console.log("favorite ", product._id)
     axios
       // .post("http://localhost:5000/api/favorites/add", {
       .post("https://tech-bazaar-backend.vercel.app/api/favorites/add", {
@@ -65,16 +58,13 @@ const ProductDetail = () => {
         productId: product._id,
       })
       .then((result) => {
-        console.log(result.data.favorites);
         if (result.data.message === "Product added") {
-          console.log("product added");
-          toast.success("product has added to your favorite")
-          navigate("/favorite")
+          toast.success("Product has been added to your favorites!");
+          navigate("/favorite");
         }
         if (result.data.message === "product already exist") {
-          console.log("product already exist");
-          toast.info("product has already exists to your favorite")
-          navigate("/favorite")
+          toast.info("Product already exists in your favorites");
+          navigate("/favorite");
         }
       })
       .catch((err) => {
@@ -86,121 +76,107 @@ const ProductDetail = () => {
     setImage(imageAddress);
   };
 
-
   if (!product) {
-     return (
+    return (
       <div className="flex justify-center items-center h-screen">
-        <FadeLoader color='#3B82F6'/>
+        <FadeLoader color="#3B82F6" />
       </div>
     );
   }
 
   return (
-    <div className="xs:w-[95%]">
-      <div className="flex justify-center items-center xs:flex-wrap h-[calc(100vh-70px)] space-x-5">
-        <div className="w-1/2 xs:w-full flex justify-end xs:justify-center">
-          <div>
-            <div className="text-center mt-6 flex flex-wrap justify-center">
-              <img
-                src={image}
-                className="w-[300px] xs-w-[300px] mx-auto border-2 rounded-3xl"
-              />
-              <div className="flex justify-center space-x-5 mt-2">
-                {product.gallary.map((prod, i) => (
-                  <div
-                    key={i}
-                    tabIndex={0}
-                    className="border-2 rounded-lg p-1 border-gray-200  cursor-pointer focus:border-blue-400"
-                    onClick={() => changeImage(product.gallary[i])}
-                  >
-                    <img
-                      src={product.gallary[i]}
-                      className="w-[40px] mx-auto"
-                    />
-                  </div>
-                ))}
-              </div>
+    <div className="w-full py-5 px-4">
+      <div className="flex flex-col lg:flex-row justify-center items-start gap-10">
+        {/* Image Section */}
+        <div className="w-full lg:w-1/3 flex justify-center">
+          <div className="text-center">
+            <img
+              src={image}
+              alt="Product"
+              className="w-[400px] max-w-full border-2 rounded-3xl mx-auto"
+            />
+            <div className="flex justify-center space-x-3 mt-3 flex-wrap">
+              {product.gallary.map((img, i) => (
+                <div
+                  key={i}
+                  tabIndex={0}
+                  className="border-2 rounded-lg p-1 border-gray-200 cursor-pointer focus:border-blue-400"
+                  onClick={() => changeImage(img)}
+                >
+                  <img src={img} className="w-[40px] mx-auto" alt="thumb" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="w-1/2 xs:w-full">
+
+        {/* Detail Section */}
+        <div className="w-full lg:w-1/3">
           <h1 className="font-semibold text-3xl">{product.name}</h1>
-          <div className="flex space-x-3 bg-orange-100 mt-2 w-[250px] px-1 h-[30px] rounded-lg leading-[30px]">
-            <div className="flex text-yellow-400 leading-[30px] space-x-1">
-              <IoIosStar className="mt-1.5" />
-              <IoIosStar className="mt-1.5" />
-              <IoIosStar className="mt-1.5" />
-              <IoIosStar className="mt-1.5" />
-              <IoIosStar className="mt-1.5" />
+
+          <div className="flex space-x-3 bg-orange-100 mt-2 w-fit px-3 h-[30px] rounded-lg items-center">
+            <div className="flex text-yellow-400 space-x-1">
+              {[...Array(5)].map((_, i) => (
+                <IoIosStar key={i} className="mt-1" />
+              ))}
             </div>
-            <div>5.0</div>
-            <div>13 Reviews</div>
+            <div className="text-sm text-gray-800">5.0 (13 Reviews)</div>
           </div>
-          {/* <h2 className="text-2xl font-semibold">Rs {product.price}</h2> */}
-          <h1 className="mt-4 text-gray-400">Techbazar Price</h1>
-          <div className="text-2xl relative font-semibold">
-            Rs{" "}
-            <span className="text-4xl absolute top-3 left-8">
-              {product.price}
-            </span>
+
+          <h2 className="mt-4 text-gray-400">Techbazar Price</h2>
+          <div className="text-3xl font-bold text-orange-500 mt-1">
+            Rs {product.price}
           </div>
-          <div className="mt-7 flex space-x-16">
-            <div className="relative text-gray-400">
-              Rs{" "}
-              <span className="absolute top-1 left-5">
-                <strike> {product.oldPrice}</strike>
-              </span>
+
+          <div className="mt-3 flex items-center gap-6">
+            <div className="text-gray-500 line-through text-sm">
+              Rs {product.oldPrice}
             </div>
-            <div className="bg-green-100 text-green-600 px-3 py-1 rounded-md ">
+            <div className="bg-green-100 text-green-600 px-3 py-1 rounded-md text-sm">
               {product.off}% OFF
             </div>
           </div>
-          <h1 className="mt-3 mb-2">Colors</h1>
-            <div className="flex space-x-3">
-              {
-                product.colors.map((prod, i) => (
-                  <div
-                    key={i}
-                    tabIndex={0}
-                    className="w-[80px] border-2 border-gray-200 text-gray-400 focus:text-blue-500 focus:border-blue-400 rounded-lg cursor-pointer text-center py-3 px-2"
-                    onClick={() => changeImage(product.colors[i])}
-                  >
-                    <img src={product.colors[i]} className="w-[40px] mx-auto" />
-                    <div className="text-xs text-center mt-2">
-                      {product.colorName[i]}
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
 
+          <h1 className="mt-5 mb-2 font-medium">Colors</h1>
+          <div className="flex flex-wrap gap-3">
+            {product.colors.map((color, i) => (
+              <div
+                key={i}
+                tabIndex={0}
+                className="w-[80px] border-2 border-gray-200 text-gray-600 focus:text-blue-500 focus:border-blue-400 rounded-lg cursor-pointer text-center py-3 px-2"
+                onClick={() => changeImage(color)}
+              >
+                <img src={color} className="w-[40px] mx-auto" alt="color" />
+                <div className="text-xs mt-2">{product.colorName[i]}</div>
+              </div>
+            ))}
+          </div>
 
-          <div className="bg-orange-100 h-[80px] w-[400px] xs:w-[330px] mt-5 flex items-center justify-between px-2">
-            <div>
-              <input type="checkbox" className="w-4 h-4" />
-            </div>
+          {/* Gift Wrap */}
+          <div className="bg-orange-100 h-[80px] w-[350px] mt-6 flex items-center justify-between px-4 rounded">
+            <input type="checkbox" className="w-4 h-4" />
             <div className="text-sm ml-2">
               Cost: Rs 199 <br />
               Make it Memorable - Add Gift Wrapping!
             </div>
-
-            <div>
-              <img src="/assets/gift.webp" className="w-[80px]" />
-            </div>
+            <img src="/assets/gift.webp" className="w-[60px]" alt="gift" />
           </div>
 
-          <button
-            className="bg-orange-500 text-white w-[170px] xs:w-[150px] py-2 text-sm mt-3"
-            onClick={() => handleAddToCart(product)}
-          >
-            Add to Cart
-          </button>
-          <button
-            className="bg-blue-500 text-white w-[150px] py-2 text-sm mt-3 ml-2"
-            onClick={() => handleAddToFavorite(product)}
-          >
-            Add to Favorite
-          </button>
+          {/* Action Buttons */}
+          <div className="mt-6 flex flex-wrap gap-4">
+            <button
+              className="bg-orange-500 text-white px-6 py-2 rounded text-sm"
+              onClick={() => handleAddToCart(product)}
+            >
+              Add to Cart
+            </button>
+            <button
+              className="bg-blue-500 text-white px-6 py-2 rounded text-sm"
+              onClick={() => handleAddToFavorite(product)}
+            >
+              Add to Favorite
+            </button>
+          </div>
         </div>
       </div>
     </div>
