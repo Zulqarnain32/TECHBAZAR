@@ -3,8 +3,7 @@ import React, { useState } from "react";
 const Home = () => {
   const [image, setImage] = useState("assets/headphones/headphone11.png");
   return (
-    <div className="xs:py-0 xs:px-5 p-20 bg-gradient-to-r from-[#83ccff] to-[#4290fb]  xs:min-h-screen w-full">
-
+    <div className="xs:py-0 xs:px-5 px-16  bg-gradient-to-r from-[#83ccff] to-[#4290fb]  xs:min-h-screen h-[calc(100vh-70px)] w-full">
       <div className="flex  xs:flex-wrap xs:flex-col-reverse items-center justify-between h-full">
         <div className="xs:w-full w-[50%]">
           <h1 className="text-5xl xs:text-center xs:text-3xl font-bold leading-[55px]  ">
